@@ -18,7 +18,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">N° do Contrato</label>
-                                        <input class="form-control" type="number" placeholder="Número do Contrato" name="numero" id="numero" disabled value="{{$contrato->numero}}"  required >
+                                        <input class="form-control" type="text" placeholder="Número do Contrato" name="numero" id="numero" disabled value="{{$contrato->numero}}"  required >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -110,12 +110,7 @@
                                     <h6 class="mb-0">Aditivo {{ $loop->index  }}</h6>
 
                                     <p> {{ date('d/m/Y', strtotime($aditivo->data_anterior))}}</p>
-
                                     @endif
-
-
-                                    {{-- <h6 class="mb-0">Aditivo {{ $loop->index + 1 }}</h6>
-                                      <p>Data Anterior: {{ date('d/m/Y', strtotime($aditivo->data_anterior))}}</p>  --}}
                                     @endforeach
                                 </div>
                                 {{-- <div class="modal-footer">

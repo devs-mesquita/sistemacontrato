@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('postalterasenha', 	[UserController::class, 'postalterasenha'])->name('postalterasenha');
 	Route::get('/user/{id}/edit', 	[UserController::class, 'edit'])->name('users.edit');
 	Route::get('/user/{id}', 	[UserController::class, 'update'])->name('users.update');
-	Route::post('/atualizacontrato', 	[ContratoController::class, 'updateContrato'])->name('updateContrato');
+	Route::post('/atualizacontrato/{id}', 	[ContratoController::class, 'updateContrato'])->name('updateContrato');
 	// Route::get('/user/{id}/destroy', 	[UserController::class, 'destroy'])->name('users.destroy');
 	// Route::get(
 	// 	'user',

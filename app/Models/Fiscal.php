@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fiscal extends Model
 {
-    use SoftDeletes;
+    
 
     protected $table = "fiscais_contrato";
 

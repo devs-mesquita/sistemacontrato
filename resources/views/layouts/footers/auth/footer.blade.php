@@ -4,9 +4,10 @@
            
                 <div class="copyright text-right text-sm text-muted text-lg-center">
                    <div>   © 
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script></div>
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                    </div>
                  
                  
                         <div class="pull-right text-align-center">
