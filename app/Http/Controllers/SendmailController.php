@@ -10,14 +10,14 @@ class SendmailController extends Controller
  {
        $numero = $request->numero;
        $data = $request->data;
-       $publicado = $request->publicado; 
+       $processo = $request->processo; 
        $fim = $request->fim;
        $secretaria = $request-> secretaria;
 
        $data = [
         'numero' => $numero,
         'data'  => $data,
-        'publicado' => $publicado,
+        'processo' => $processo,
         'fim'=> $fim,
         'secretaria'=> $secretaria
        ];

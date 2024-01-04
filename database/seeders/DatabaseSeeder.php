@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@argon.com',
             'password' => '$2y$10$eMMXLkP579E/hf8.oSBJRu.yndQDIU0XrjRsY/R9Sr6hxzjToy0gC',
             'nivel'=>'ADMIN',
+            'cpf'=>'cpf',
+            'telefone'=>'telefone',
         ]);
     }
 }

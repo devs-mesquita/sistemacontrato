@@ -8,8 +8,9 @@
     <div>
     
         <ul class="nav navbar-right panel_toolbox">
+            @if (Auth::user()->nivel == 'ADMIN')
         <a href="{{url('user/create')}}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nova Sala">Cadastrar Usuario </a> 
-        {{ csrf_field() }} 
+   @endif
 
         <thead>
        
@@ -27,24 +28,24 @@
               <td>{{$user->email}}</td>
               <td>{{$user->nivel}}</td>
               <td class="text-center">
+                @if (Auth::user()->nivel == 'ADMIN')
                 <div style="display:flex; gap: 8px; align-items: center;">
-                  @if (Auth::user()->nivel == 'ADMIN')
-
                     <a id="btn_show"
                      style="margin: 0;"
                      href="{{ route('user.edit', ['user' => $user->id]) }}"
                      title="Editar">
                      <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
-                    @endif
-                    
                         <a id="btn_exclui_user" style="margin: 4;"
                         {{-- href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}" --}}
                         href="#"
                         data-excluir='{{$user->id}}'
                         title="Excluir">
                         <i class="fa fa-trash" ></i> 
+                        @endif
                     </a>
+                </div>
+                  
               
 
 
@@ -66,17 +67,16 @@
     @endsection
             
     @push('js')
-    <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>   
-    <script>var table = new DataTable('#scc', {
+      
+      <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+      <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>   
+      <script>var table = new DataTable('#scc', {
       language: {
           url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
-      },
-      
+      },  
   }); </script>
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
 $("table#scc").on("click", "#btn_exclui_user" ,function(){
    let id = $(this).data('excluir');
          // console.log(id);
@@ -99,21 +99,10 @@ $("table#scc").on("click", "#btn_exclui_user" ,function(){
                                 }).done(function() {
                                     location.reload();
                                 });
-
-                        //    $.post("{{ url('/solicitacao') }}/" + id, {
-                        //    id: id,
-                        //    _method: "DELETE",
-                        //    _token: "{{ csrf_token() }}"
-                          
-                        //    }).done(function() {
-                        //    location.reload();
-                        //    });
-                     
                         }
-                     })
-                  
+                     })             
 });
-</script>
-<script>
+</script> 
+ 
 
 @endpush

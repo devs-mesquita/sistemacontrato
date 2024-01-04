@@ -17,16 +17,22 @@
                             <input type="hidden" id="id" name="id" value="{{ $contrato->id }}" value="PUT">
                             <p class="text-uppercase text-sm">Informações do Contrato</p>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">N° do Contrato</label>
+                                        <label for="example-text-input" class="form-control-label">N° do Contrato:</label>
                                         <input class="form-control" type="text" placeholder="Número do Contrato"
                                             name="numero" id="numero" value="{{ $contrato->numero }}" required>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">N° do Processo:</label>
+                                        <input class="form-control" type="text" placeholder="Número do Processo" name="processo" id="processo" value="{{ $contrato->processo }}" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Data Publicação</label>
+                                        <label for="example-text-input" class="form-control-label">Data Publicação:</label>
                                         <input required class="form-control datepicker" name="publicado" id="publicado"
                                             type="date" placeholder="dd/mm/aaaa" value="{{ $contrato->publicado }}"
                                             required>
@@ -36,18 +42,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Término do
-                                            Contrato</label>
+                                            Contrato:</label>
                                         <input required class="form-control datepicker" name="fim" id="fim"
                                             type="date" placeholder="dd/mm/aaaa" value="{{ $contrato->fim }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="example-text-input" class="form-control-label">Data da Homologação</label>
+                                    <label for="example-text-input" class="form-control-label">Data da Homologação:</label>
                                     <input required class="form-control datepicker" name="data" id="data"
                                         type="date" placeholder="dd/mm/aaaa" value="{{ $contrato->data }}" required>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label for="example-text-input" class="form-control-label">Secretaria Destinada
                                         :</label>
                                     <select required class="form-select" name="secretaria" id="secretaria">
@@ -122,6 +128,41 @@
                                             Superintendência de Arrecadação Mercantil e Fiscalização</option>
                                     </select>
                                 </div>
+                            
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">Tipos de Contrato :</label>
+                                <select required class="form-select" name="classe" id="classe">
+                                    <option value="{{ $contrato->classe }}" selected>{{ $contrato->classe }}
+                                    </option>
+                                    <option value="Jagunco">Jagunco</option>
+                                    <option value="Baiano">Baiano</option>
+                                    <option value="Sisifo"> Sisifo</option>
+                                    <option value="Murdock">Murdock</option>
+                                    <option value="Marco">Marco</option>
+                                    <option value="Marcos">Marcos</option>
+                                    <option value="du">Du</option>
+                                    <option value="dudu">Dudu</option> 
+                                </select>
+                            </div>  
+                        </div>
+                           
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Nome da Empresa :</label>
+                            <input class="form-control" type="text" placeholder="Nome da Empresa" name="empresa" id="empresa" value="{{$contrato->empresa}}" required>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Objeto do Contrato :</label>
+                            <input class="form-control" type="text" placeholder="Objeto do Contrato" name="objeto" id="objeto"  value="{{$contrato->objeto}}">
+                            
+                            </option>
+                        </div>
+                    </div>
                             </div>
                             <br>
                             <p class="text-uppercase text-sm">Informações do Fiscal</p>
@@ -132,13 +173,17 @@
                                 <div class="d-flex flex-column">
                                     <div class="form-group row dados">
                                         <input type="hidden" id="fiscal[][fiscal_id]" name="fiscal[{{$key}}][fiscal_id]" value="{{$fiscal->id}}">
-                                        <div class="form-group col-md-5">
+                                        <div class="form-group col-md-6">
                                             <label for="example-text-input" class="form-control-label">Nome do Fiscal</label>
                                             <input class="form-control" type="text" name="fiscal[{{$key}}][nome]" id="fiscal[]" placeholder="Nome do Fiscal" value="{{$fiscal->nome}}" required>
                                         </div>
-                                        <div class="form-group col-md-5">
+                                        <div class="form-group col-md-6">
                                             <label for="example-text-input" class="form-control-label">E-mail do Fiscal</label>
                                             <input class="form-control" type="email" placeholder="Digite o E-mail" name="fiscal[{{$key}}][email]" id="email[]" value="{{$fiscal->email}}" required> 
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="example-text-input" class="form-control-label">Telefone do Fiscal</label>
+                                            <input class="form-control" type="telefone"  placeholder="Digite o telefone" name="fiscal[{{$key}}][telefone]" id="telefone" value="{{$fiscal->telefone}}" required>   
                                         </div>
                                         <div class="form-group col-md-2">
                                             <button class="btn btn-link text-danger text-gradient px-3 mb-0 btn_remove">
@@ -183,8 +228,8 @@
     @include('layouts.footers.auth.footer')
 @endsection
 
-<script src="{{ asset('assets/js/plugins/chartjs.min.js') }}" ;></script>
 @push('js')
+    <script src="{{ asset('/assets/js/vanillaMasker.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
@@ -194,11 +239,11 @@
             console.log(i);
             e.preventDefault();
             $('.novadiv').append(
-                '<div class="dados"> <div class="d-flex flex-column"><div class="form-group row dados"><div class="form-group col-md-5"><label for="example-text-input" class="form-control-label">Nome do Fiscal</label><input class="form-control" type="text" name="fiscal[' +
+                '<div class="dados"> <div class="d-flex flex-column"><div class="form-group row dados"><div class="form-group col-md-6"><label for="example-text-input" class="form-control-label">Nome do Fiscal</label><input class="form-control" type="text" name="fiscal[' +
                 i +
-                '][nome]" id="fiscal" placeholder="Nome do Fiscal"></div><div class="form-group col-md-5"><label for="example-text-input" class="form-control-label">E-mail do Fiscal</label><input class="form-control" type="email"  placeholder="Digite o E-mail" name="fiscal[' +
+                '][nome]" id="fiscal" placeholder="Nome do Fiscal"></div><div class="form-group col-md-6"><label for="example-text-input" class="form-control-label">E-mail do Fiscal</label><input class="form-control" type="email"  placeholder="Digite o E-mail" name="fiscal[' +
                 i +
-                '][email]" id="email">   </div><div class="form-group col-md-2"><button class="btn btn-link text-danger text-gradient px-3 mb-0 btn_remove"><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Remover</button></div></div></div></div><div></div></div>'
+                '][email]" id="email">   </div><div class="form-group col-md-6"><label for="example-text-input" class="form-control-label">Telefone do Fiscal</label><input class="form-control" type="telefone"  placeholder="Digite o telefone" name="fiscal['+i+'][telefone]" id="telefone[]" required></div><div class="form-group col-md-2"><button class="btn btn-link text-danger text-gradient px-3 mb-0 btn_remove"><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Remover</button></div></div></div></div><div></div></div>'
                 );
             i++;
         });
@@ -209,5 +254,8 @@
                 $(this).parents('.dados').remove();
             }
         });
+    </script>
+    <script>
+        VMasker(document.querySelector("#telefone")).maskPattern("(99) 99999-9999");
     </script>
 @endpush

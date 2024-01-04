@@ -13,12 +13,18 @@ return new class extends Migration
     {
         Schema::create('contrato', function (Blueprint $table) {
             $table->id();
-            $table->string('numero');
-            $table->date('data');
-            $table->date('fim');
-            $table->string('tipo')->nullable();
-            $table->string('secretaria');
-            $table->date('publicado');
+            $table->string('numero'); // do contrato
+            $table->string('processo'); // numero
+            $table->date('data'); //data da homologacao
+            $table->date('fim'); //termino de contrato
+            $table->string('tipo')->nullable(); // campo vazio
+            $table->string('secretaria'); // nome
+            $table->date('publicado'); // data da publicadao
+            $table->string('empresa'); // nome da empresa
+            $table->string('objeto'); //objeto de contrato
+            $table->string('classe'); // tipos de contrato
+            $table->enum ('status', ['DIGITADO', 'ASSINADO', 'PAGO','DEVOLVIDO', 'ARQUIVADO', 'CANCELADO']); 
+            $table->string('motivo')->nullable(); //motivo do status
             // $table->dateTime('deleted_at');
             $table->BigInteger('user_id');
 

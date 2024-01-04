@@ -5,7 +5,7 @@
         @include('layouts.footers.auth.footer')
    
 @endsection
-<script src="{{asset('assets/js/plugins/chartjs.min.js')}}";></script>
+<script src="{{asset('assets/js/plugins/chartjs.min.js')}}"></script>
 @push('js')
    
 @endpush

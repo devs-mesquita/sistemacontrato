@@ -16,16 +16,6 @@ class ContratoController extends Controller
         // $contrato = $request -> all(); 
         $contratos = Contrato::all();
 
-        // dd($contratos);
-    
-        // $data_mes_tres = Carbon::now('America/Sao_Paulo')->subMonths(3)->format('d/m/Y');
-
-        // $data_mes_dois = Carbon::now('America/Sao_Paulo')->subMonths(2)->format('d/m/Y');
-
-        // $data_mes_um = Carbon::now('America/Sao_Paulo')->subMonths(1)->format('d/m/Y');
-
-        // dd($data_mes_tres);
-
         return view('pages.contratos.index', compact('contratos'));
     } 
 
@@ -45,16 +35,20 @@ class ContratoController extends Controller
 
     public function updateContrato(Request $request, $id)
 {
-    // dd($request->all());
     // Validar os dados recebidos
     $request->validate([
         'numero' => 'required',
+        'processo' => 'required',
         'data' => 'required|date',
         'publicado' => 'required|date',
         'fim' => 'required|date',
         'secretaria' => 'required',
+        'classe' => 'required',
+        'empresa' => 'required',
+        'objeto' => 'required',
         'fiscal' => 'required|array',
         'email.*' => 'required|email',
+        
     ]);
 
     // Encontrar o contrato pelo ID com seus fiscais relacionados
@@ -62,10 +56,15 @@ class ContratoController extends Controller
 
     // Atualizar os dados do contrato
     $contrato->numero = $request->numero;
+    $contrato->processo = $request->processo;
     $contrato->data = $request->data;
     $contrato->publicado = $request->publicado;
     $contrato->fim = $request->fim;
     $contrato->secretaria = $request->secretaria;
+    $contrato->classe = $request->classe;
+    $contrato->empresa = $request->empresa;
+    $contrato->objeto = $request->objeto;
+    
     $contrato->save();
     // Deletar todos os fiscais associados ao contrato
     $contrato->fiscais()->delete();
@@ -75,6 +74,7 @@ class ContratoController extends Controller
             Fiscal::create([
                 'nome' => $fisca['nome'],
                 'email' => $fisca['email'],
+                'telefone' => $fisca['telefone'],
                 'contrato_id' => $contrato->id,
             ]);
         }
@@ -95,10 +95,15 @@ class ContratoController extends Controller
        $contrato = new Contrato;
        $dados = $request;
        $contrato->numero = $request->numero;
+       $contrato->processo = $request->processo;
        $contrato->data = $request->data;
        $contrato->publicado = $request->publicado; 
        $contrato->fim =  $request->fim;
        $contrato->secretaria =  $request->secretaria;
+       $contrato->classe =  $request->classe;
+       $contrato->empresa = $request->empresa;
+       $contrato->objeto = $request->objeto;
+       
 
        $contrato->user_id  = $user_id;
         $contrato -> save();
@@ -108,6 +113,7 @@ class ContratoController extends Controller
             Fiscal::create([
                 'nome' => $dados['fiscal'][$i],
                 'email' => $dados['email'][$i],
+                'telefone' => $dados['telefone'][$i],
                 'contrato_id' => $contrato->id,
             ]);
         }
@@ -133,7 +139,7 @@ class ContratoController extends Controller
     //    $contrato->save();
 
 
-        return redirect('/contrato');
+        return redirect('/contrato',);
     } 
     public function show($id)
     {
@@ -177,6 +183,20 @@ public function update(Request $request)
     $contrato->save();
 
     return response()->json(["contrato" => $contrato]);
+}
+
+public function alterastatus(Request $request)
+{
+
+    $contrato = Contrato::find($request->id);
+
+    $contrato->status = $request->status;
+    $contrato->motivo = $request->motivo;
+
+    $contrato->save();
+
+  
+
 }
     
 }

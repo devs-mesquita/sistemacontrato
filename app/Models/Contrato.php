@@ -13,11 +13,16 @@ class Contrato extends Model
 
     protected $fillable = [
         'numero',
+        'processo',
         'data',
         'fim',
         'tipo',
         'secretaria',
         'publicado',
+        'empresa',
+        'objeto',
+        'classe',
+        'motivo',
         'user_id',
         'deleted_at'
     ];

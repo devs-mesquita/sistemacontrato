@@ -26,6 +26,8 @@ class UserController extends Controller
         $user = new User;
         $user->name = $data->name;
         $user->email = $data->email;
+        $user->cpf = $data->cpf;
+        $user->telefone = $data->telefone;
         $user->nivel = $data->nivel;
         $user->password = bcrypt('pmm123456');
 
@@ -75,6 +77,8 @@ class UserController extends Controller
         $user->name = $request->name; 
         $user->email = $request->email;  
         $user->nivel = $request->nivel;
+        $user->cpf = $request->cpf;
+        $user->telefone = $request->telefone;
         $user->save(); 
          return redirect('/user'); 
     }

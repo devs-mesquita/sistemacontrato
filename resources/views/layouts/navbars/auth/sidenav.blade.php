@@ -31,6 +31,15 @@
                     <span class="nav-link-text ms-1">Lista Contratos</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'responsavel.index' ? 'active' : '' }}" href="{{ route('responsavel.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-badge text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Lista de Responsáveis</span>
+                </a>
+            </li>
           
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}">
@@ -43,34 +52,56 @@
                     <span class="nav-link-text ms-1">Usuarios</span>
                 </a>
             </li>
-
-        
-                      
-            {{-- <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Lista Contratos</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Usuarios</span>
-                </a>
-            </li> --}}
-            
-
         </ul>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    
+
+<div>
+    <a type="button"  class="sidebar-footer hidden-small"  data-bs-toggle="modal" data-bs-target="#atualizaModal" style="text-align: center!important; font-size: 15px; color: #bfa15f;padding-bottom:15px">
+       Notas de Atualização
+    </a> 
+
+</div>
+
+      <div class="modal fade" id="atualizaModal" tabindex="-1" role="dialog" aria-labelledby="atualizaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="atualizaModalLabel">Notas de Atualização</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <h4>Versão Beta 0.1</h4>
+                <p> Essa versão contem as funcionalidades basicas do sistema</p>
+                <li>Criar novos Contratos</li>
+                <li>Trocar status do Contrato</li>
+                <li>Criar novos Consultores</li>
+                <p></p>
+                <h4>Versão Beta 0.2</h4>
+                <li>Adicionado novos dashboards</li>
+                <li>Adicionado Lista de Responsáveis</li>
+                <li>Adicionado cpf no cadastro do Usuário</li>
+                <li>Adicionado telefone no cadastro do Fiscal</li>
+                <li>Adicionado no cadastro de contratos: N° PROCESSO, TIPO CONTRATO, OBJETO CONTRATO, EMPRESA, STATUS.</li>
+                <li>Adicionado botao alterar status juntamente com o motivo da troca.</li>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
 </aside>
+
+
 
 

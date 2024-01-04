@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fiscais_contrato', function (Blueprint $table) {
+        Schema::create('responsavel', function (Blueprint $table) {
             $table->id();
-            $table->Biginteger('contrato_id')->unsigned();
-            // $table->foreignId('contrato_id')->constrained();
             $table->string('nome');
             $table->string('email');
             $table->string('telefone');
             $table->timestamps();
             
-        
-            $table->foreign('contrato_id')->references('id')->on('contrato');
         });
 
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fiscais_contrato');
+        Schema::dropIfExists('responsavel');
     }
 };

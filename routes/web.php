@@ -11,6 +11,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ResponsavelController;
 
 // Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -29,32 +30,17 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resources([
 		'contrato' => ContratoController::class,
 		'user'	   => UserController::class,
+		'responsavel' => ResponsavelController::class,
 	]);
 
 	Route::get('alterasenha',	[UserController::class, 'alterasenha'])->name('alterasenha');
 	Route::post('postalterasenha', 	[UserController::class, 'postalterasenha'])->name('postalterasenha');
 	Route::get('/user/{id}/edit', 	[UserController::class, 'edit'])->name('users.edit');
-	Route::get('/user/{id}', 	[UserController::class, 'update'])->name('users.update');
+	Route ::get('/user/{id}', 	[UserController::class, 'update'])->name('users.update');
 	Route::post('/atualizacontrato/{id}', 	[ContratoController::class, 'updateContrato'])->name('updateContrato');
-	// Route::get('/user/{id}/destroy', 	[UserController::class, 'destroy'])->name('users.destroy');
-	// Route::get(
-	// 	'user',
-	// 	[UserController::class, 'index']
-	// )->name('index');
+	Route::post('/alterastatus', 	[ContratoController::class, 'alterastatus'])->name('alterastatus');
+    Route::post('/responsavel/{id}', [ResponsavelController::class, 'update'])->name('responsavel.update');
+    
 
-	// Route::get(
-	// 	'user/create',
-	// 	[UserController::class, 'create']
-	// )->name('create');
-
-	// Route::post(
-	// 	'user',
-	// 	[UserController::class, 'store']
-	// )->name('user.store');
-
-	// Route::get(
-	// 	'user',
-	// 	[UserController::class, 'edit']
-	// )->name('edit');
 });
 

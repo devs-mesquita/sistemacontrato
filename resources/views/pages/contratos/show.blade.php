@@ -15,10 +15,16 @@
                     <div class="card-body">
                             <p class="text-uppercase text-sm">Informações do Contrato</p>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">N° do Contrato</label>
                                         <input class="form-control" type="text" placeholder="Número do Contrato" name="numero" id="numero" disabled value="{{$contrato->numero}}"  required >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">N° do Processo</label>
+                                        <input class="form-control" type="text" placeholder="Número do Processo" name="processo" id="processo" disabled value="{{$contrato->processo}}"  required >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -45,6 +51,24 @@
                                         <input class="form-control" name="secretaria" id="secretaria" type="text" placeholder="Secretaria Destinada" disabled value="{{$contrato->secretaria}}" required>
                                     </div>
                                 </div>
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Tipo de Contrato</label>
+                                        <input class="form-control" name="classe" id="classe" type="text" placeholder="Tipos de Contrato" disabled value="{{$contrato->classe}}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Nome da Empresa </label>
+                                        <input class="form-control" type="text" placeholder="Nome da Empresa" name="empresa" id="empresa" disabled value="{{$contrato->empresa}}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Objeto do Contrato </label>
+                                        <input class="form-control" type="text" placeholder="Objeto do Contrato" name="objeto" id="objeto" disabled value="{{$contrato->objeto}}" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Quantidade de Aditivos</label>
@@ -52,6 +76,17 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Status do Contrato</label>
+                                        <input required class="form-control" name="status" id="status" type="text" disabled value="{{$contrato->status}}" required >
+                                    </div>
+                                </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="form-control-label">Motivo do status</label>
+                                <input class="form-control" type="text"  placeholder="Digite o motivo" name="motivo" id="motivo" disabled value="{{$contrato->motivo}}" required>   
+                            </div>
+                                <div class="col-md-9 p-2">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Histórico de Aditivos</label>
                                         <div>
@@ -73,7 +108,7 @@
 
                             @foreach ($contrato->fiscais as $fiscal)
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Nome do Fiscal</label>
                                             <input class="form-control" type="text" name="fiscal" id="fiscal" placeholder="Nome do Fiscal" disabled value="{{$fiscal->nome}}" required>
@@ -84,6 +119,10 @@
                                             <label for="example-text-input" class="form-control-label">E-mail do Fiscal</label>
                                             <input class="form-control" type="email"  placeholder="Digite o E-mail " name="email" id="email" disabled value="{{$fiscal->email}}" required>   
                                         </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="example-text-input" class="form-control-label">Telefone do Fiscal</label>
+                                        <input class="form-control" type="telefone"  placeholder="Digite o telefone" name="telefone" id="telefone" disabled value="{{$fiscal->telefone}}" required>   
                                     </div>
                                 </div>
                             @endforeach
@@ -126,6 +165,10 @@
 @endsection
 
 @push('js')
+<script src="{{ asset('/assets/js/vanillaMasker.min.js') }}"></script>
 
+<script>
+    VMasker(document.querySelector("#telefone")).maskPattern("(99) 99999-9999");
+</script>
 @endpush
    

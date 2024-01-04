@@ -16,10 +16,12 @@
 
                     <tr>
                         <th>Número do Contrato</th>
+                        <th>Número do Processo</th>
                         <th>Data da Publicação</th>
                         <th>Término do Contrato</th>
-                        <th>Data da Homologação</th>
-                        <th>Secretaria destinada </th>
+                        <th>Tipo de  Contrato</th>
+                        <th>Secretaria Responsável </th>
+                        <th>Status</th>
                         <th>Ações</th>
 
                     </tr>
@@ -27,111 +29,123 @@
                 <tbody>
                     @foreach ($contratos as $contrato)
                         <tr>
-                            <td>{{$contrato->numero}}</td>
+                            <td>{{ $contrato->numero }}</td>
                             
-                            <td> 
+                            <td>{{ $contrato->processo }}</td>
+
+                            <td>
                                 @if ($contrato->publicado == null)
                                     ---
                                 @else
-                                    {{date('d/m/Y', strtotime($contrato->publicado))}}
-                                @endif       
-                            </td>
-
-
-                           
-                        @php
-                            $expirationDate = strtotime($contrato->fim);
-                            $today = strtotime(now());
-                            $diffMonths = floor(($expirationDate - $today) / (30 * 24 * 60 * 60));
-                        @endphp
-                        
-                        @if ($diffMonths <= 1)
-                            <td class="text-danger">
-                        @elseif ($diffMonths <= 2)
-                            <td class="text-warning">
-                        @elseif ($diffMonths == 3)
-                            <td style="color: orange;">
-                        @else
-                            <td>
-                        @endif
-                          <b>{{ date('d/m/Y', $expirationDate) }}</b>  
-                        </td>
-                        
-
-                                {{-- {{date('d/m/Y', strtotime($contrato->fim.'-3 month'))}}
-                                --}}
-                                {{-- @if ({{date('d/m/Y', strtotime($contrato->fim.'-3 month' ))}} < {{date('d/m/Y', strtotime($contrato->fim))}})
-                                    ain
-                                
-                                @endif --}}
-                        
-
-                                {{-- @if ({{date('d/m/Y'),strtotime($contrato->fim)}}  < {{$data_mes_tres}})
-                                    a
-                                @elseif(strtotime($contrato->fim) <= {{$data_mes_dois}})
-                                    b
-                                @elseif(strtotime($contrato->fim) <= {{$data_mes_um}})
-                                    c
-                                @endif --}}
-                            {{-- CALCULAR -3 NO MES PARA PEGAR 90 DIAS --}}
-
-                            {{-- CALCULAR -2 NO MES PARA PEGAR 60 DIAS --}}
-
-                            {{-- CALCULAR -1 NO MES PARA PEGAR 30 DIAS --}}
-
-
-
-                            </td>
-                            
-                            
-                            {{-- <td>{{date('d/m/Y', strtotime($contrato->fim))}}</td> --}}
-
-                            <td>
-                                @if ($contrato->data == null)
-                                    ---
-                                @else 
-                                    {{date('d/m/Y', strtotime($contrato->data))}}
+                                    {{ date('d/m/Y', strtotime($contrato->publicado)) }}
                                 @endif
                             </td>
 
-                            <td>{{$contrato->secretaria}}</td>
+
+
+                            @php
+                                $expirationDate = strtotime($contrato->fim);
+                                $today = strtotime(now());
+                                $diffMonths = floor(($expirationDate - $today) / (30 * 24 * 60 * 60));
+                                
+                                if ($expirationDate > $today){
+                                
+                                $data_inicio = new DateTime("now");
+                                $data_fim = new DateTime($contrato->fim);
+                                $dateInterval = $data_inicio->diff($data_fim);
+                                }
+                                
+
+                            @endphp
+                        
+                        
+                            @if ($diffMonths <= 1)
+                                <td class="text-danger">
+                                @elseif ($diffMonths <= 2)
+                                <td class="text-warning">
+                                @elseif ($diffMonths == 3)
+                                <td style="color: orange;">
+                                @else
+                                <td>
+                            @endif
+                            <b>
+                                @if (isset($dateInterval->days))
+                                    {{$dateInterval->days}} Dias
+                                @else
+                                    Expirado
+                                @endif
+                                 {{ date('d/m/Y', $expirationDate) }}</b>
+                            </td>
+                            </td>
+                            <td>
+                                 {{$contrato->classe}}
+                                    
+                                {{-- @else
+                                    {{ date('d/m/Y', strtotime($contrato->data)) }}
+                                @endif --}}
+                            </td>
+                            <td>{{ $contrato->secretaria }}</td>
+
+                            <td>{{ $contrato->status }}
+
+
+                            </td>
                             <td class="text-center">
                                 <div style="display:flex; gap: 8px; align-items: center;">
-                                    @if (Auth::user()->nivel == 'ADMIN')
+                                    
                                         <a id="btn_show" style="margin: 0;"
                                             href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
                                             title="Editar">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
-                                    @endif
+                                    
 
-                                    <a id="btn_show" style="margin: 0;" {{-- class="btn btn-primary btn-xs action botao_acao btn_vizualiza" --}}
-                                        href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
-                                        title="Visualizar">
-                                        <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
+                                    <a id="btn_show" 
+                                    style="margin: 0;" {{-- class="btn btn-primary btn-xs action botao_acao btn_vizualiza" --}}
+                                    href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
+                                    title="Visualizar">
+                                    <i class="fa fa-fw fa-eye" 
+                                    aria-hidden="true"></i>
                                     </a>
+
                                     @if (Auth::user()->nivel != 'USUARIO')
-                                        <a id="btn_exclui_solicitacao" style="margin: 0;" {{-- class="btn btn-danger btn-xs action botao_acao btn_excluir" --}}
-                                            data-arquivar="{{ $contrato->id }}" href="#" title="Arquivar">
-                                            <i class="ni ni-archive-2"></i>
+                                        <a id="btn_exclui_solicitacao" 
+                                        style="margin: 0;" {{-- class="btn btn-danger btn-xs action botao_acao btn_excluir" --}}
+                                        data-arquivar="{{ $contrato->id }}" 
+                                        href="#" 
+                                        title="Arquivar">
+                                        <i class="ni ni-archive-2"></i>
                                         </a>
                                     @endif
+
                                     <a id="btn_aditiva_contrato" style="margin: 0;" {{-- class="btn btn-danger btn-xs action botao_acao btn_excluir" --}}
-                                        {{-- data-arquivar="{{$contrato->id}}" --}} data-aditivar="{{ $contrato->id }}" href="#"
+                                        {{-- data-arquivar="{{$contrato->id}}" --}} 
+                                        data-aditivar="{{ $contrato->id }}" 
+                                        href="#"
                                         title="Aditivar">
                                         <i class="ni ni-fat-add"></i>
                                     </a>
+
+                                    <a class="btn_trocar_status"
+                                        data-info="{{ $contrato->id }}" 
+                                        data-toggle="tooltip" ,
+                                        data-placement="bottom"
+                                        href="#"
+                                        title="Status">
+                                        <i class="ni ni-active-40"></i>
+                                    </a>
                                 </div>
-                                </td>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
-        
+
         </div>
 
     </div>
-  
-@include('layouts.footers.auth.footer')
+
+    @include('layouts.footers.auth.footer')
 @endsection
 
 @push('js')
@@ -229,8 +243,128 @@
 
                 }
             })
+        });
+    </script>
+    <script>
+ $("body").on("click", "a.btn_trocar_status", function(e) {
+            const id = $(this).data('info');
+            console.log(id);
+            let btn = $(this);
+            Swal.fire({
+                title: "Selecione o novo Status",
+                //text: "Você não poderá reverter isso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Alterar Status',
+                html: `
+                <label for="swal-status">Novo Status</label>
+                <select id="swal-status" class="swal2-input">
+                    <option value="DIGITADO">DIGITADO</option>
+                    <option value="ASSINADO">ASSINADO</option>
+                    <option value="PAGO">PAGO</option>
+                    <option value="DEVOLVIDO">DEVOLVIDO</option>
+                    <option value="QUITADO">QUITADO</option>
+                    <option value="CANCELADO">CANCELADO</option>
+                </select>
+                <br>
+                <label for="swal-input1">Motivo : </label>
+                <input id="swal-input1" class="swal2-input">
+            `,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const status = $("#swal-status").val();
+                    const motivo = $("#swal-input1").val();
+                    
+                    $.post("{{ url('alterastatus') }}", {
+                        id: id,
+                        status: status,
+                        motivo: motivo,
+                        _token: "{{ csrf_token() }}",
+                    }).done(function() {
+                        location.reload();
+                    });
+
+                    // console.log(result, inputNumber.value)
+                    // console.log(id);
+                    // $.post("{{ url('/contrato') }}/" + id, {
+                    //     meses: inputNumber.value,
+                    //     id: id,
+                    //     _method: "PATCH",
+                    //     _token: "{{ csrf_token() }}"
+                    // }).done(function() {
+                    //     location.reload();
+                    // });
+
+                    //    $.post("{{ url('/solicitacao') }}/" + id, {
+                    //    id: id,
+                    //    _method: "DELETE",
+                    //    _token: "{{ csrf_token() }}"
+
+                    //    }).done(function() {
+                    //    location.reload();
+                    //    });
+
+                }
+            })
 
 
         });
+
+
+
+
+
+
+//     $(document).ready(function() {
+//     $("body").on("click", "a.btn_trocar_status", function(e) {
+//         // Evitar que a página seja recarregada	
+//         e.preventDefault();
+//         let id = $(this).data('info');
+//         console.log(id);
+
+//         Swal.fire({
+//             title: "Selecione o novo Status",
+//             html: `
+//                 <label for="swal-status">Novo Status</label>
+//                 <select id="swal-status" class="swal2-input">
+//                     <option value="DIGITADO">DIGITADO</option>
+//                     <option value="ASSINADO">ASSINADO</option>
+//                     <option value="PAGO">PAGO</option>
+//                     <option value="DEVOLVIDO">DEVOLVIDO</option>
+//                     <option value="QUITADO">QUITADO</option>
+//                     <option value="CANCELADO">CANCELADO</option>
+//                 </select>
+//                 <br>
+//                 <label for="swal-input1">Motivo : </label>
+//                 <input id="swal-input1" class="swal2-input">
+//             `,
+//             showCancelButton: true,
+//             inputValidator: (value) => {
+//                 console.log (value)
+//                 let status = $("#swal-status").val();
+//                 let motivo = $("#swal-input1").val();
+
+//                 if (status === '') {
+//                     Swal.fire(`Selecione um valor para mudar o status`);
+//                 } else {
+//                     console.log("Status:", status);
+//                     console.log("Motivo:", motivo);
+
+//                     $.post("{{ url('alterastatus') }}", {
+//                         id: id,
+//                         status: status,
+//                         motivo: motivo,
+//                         _token: "{{ csrf_token() }}",
+//                     }).done(function() {
+//                         location.reload();
+//                     });
+//                 }
+//             }
+//         });
+//     });
+// });
+
     </script>
 @endpush

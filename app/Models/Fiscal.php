@@ -15,6 +15,7 @@ class Fiscal extends Model
         'nome',
         'email',
         'id',
+        'telefone',
         'contrato_id'
     ];
     public function Contrato()
