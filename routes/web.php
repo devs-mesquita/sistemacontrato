@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route ::get('/user/{id}', 	[UserController::class, 'update'])->name('users.update');
 	Route::post('/atualizacontrato/{id}', 	[ContratoController::class, 'updateContrato'])->name('updateContrato');
 	Route::post('/alterastatus', 	[ContratoController::class, 'alterastatus'])->name('alterastatus');
-    Route::post('/responsavel/{id}', [ResponsavelController::class, 'update'])->name('responsavel.update');
+    // Route::post('/responsavel/{id}', [ResponsavelController::class, 'update'])->name('responsavel.update');
     
 
 });
