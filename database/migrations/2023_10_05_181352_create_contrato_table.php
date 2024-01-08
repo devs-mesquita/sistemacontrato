@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('empresa'); // nome da empresa
             $table->string('objeto'); //objeto de contrato
             $table->string('classe'); // tipos de contrato
-            $table->enum ('status', ['DIGITADO', 'ASSINADO', 'PAGO','DEVOLVIDO', 'ARQUIVADO', 'CANCELADO']); 
+            $table->enum ('status', ['VIGENTE', 'VENCIDO', 'RESCINDIDO','QUITADO', 'CANCELADO']); 
             $table->string('motivo')->nullable(); //motivo do status
             // $table->dateTime('deleted_at');
             $table->BigInteger('user_id');

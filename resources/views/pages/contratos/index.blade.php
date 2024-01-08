@@ -240,7 +240,7 @@
                     //    }).done(function() {
                     //    location.reload();
                     //    });
-
+  
                 }
             })
         });
@@ -261,10 +261,9 @@
                 html: `
                 <label for="swal-status">Novo Status</label>
                 <select id="swal-status" class="swal2-input">
-                    <option value="DIGITADO">DIGITADO</option>
-                    <option value="ASSINADO">ASSINADO</option>
-                    <option value="PAGO">PAGO</option>
-                    <option value="DEVOLVIDO">DEVOLVIDO</option>
+                    <option value="VIGENTE">VIGENTE</option>
+                    <option value="VENCIDO">VENCIDO</option>
+                    <option value="RESCINDIDO">RESCINDIDO</option>
                     <option value="QUITADO">QUITADO</option>
                     <option value="CANCELADO">CANCELADO</option>
                 </select>
