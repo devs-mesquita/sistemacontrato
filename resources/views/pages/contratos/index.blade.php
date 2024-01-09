@@ -264,8 +264,6 @@
                     <option value="VIGENTE">VIGENTE</option>
                     <option value="VENCIDO">VENCIDO</option>
                     <option value="RESCINDIDO">RESCINDIDO</option>
-                    <option value="QUITADO">QUITADO</option>
-                    <option value="CANCELADO">CANCELADO</option>
                 </select>
                 <br>
                 <label for="swal-input1">Motivo : </label>
