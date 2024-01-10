@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-md-6 ">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Objeto do Contrato </label>
+                                        <label for="example-text-input" class="form-control-label">Objeto do Contrato (Assunto) </label>
                                         <input class="form-control" type="text" placeholder="Objeto do Contrato" name="objeto" id="objeto" disabled value="{{$contrato->objeto}}" required>
                                     </div>
                                 </div>

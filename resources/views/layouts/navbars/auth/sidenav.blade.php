@@ -31,15 +31,18 @@
                     <span class="nav-link-text ms-1">Lista Contratos</span>
                 </a>
             </li>
+            @if (Auth::user()->nivel != 'USUARIO')
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'responsavel.index' ? 'active' : '' }}" href="{{ route('responsavel.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-badge text-primary text-sm opacity-10"></i>
                     </div>
+                    
                     <span class="nav-link-text ms-1">Lista de Responsáveis</span>
                 </a>
             </li>
+           
           
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}">
@@ -53,7 +56,9 @@
                 </a>
             </li>
         </ul>
+        @endif
     </div>
+    
     <br>
     <br>
     <br>
@@ -65,7 +70,7 @@
 
 
 <div>
-    <a type="button"  class="sidebar-footer hidden-small"  data-bs-toggle="modal" data-bs-target="#atualizaModal" style="text-align: center!important; font-size: 15px; color: #bfa15f;padding-bottom:15px">
+    <a type="button"  class="sidebar-footer hidden-small"  data-bs-toggle="modal" data-bs-target="#atualizaModal" style="text-align: center font-size: 15px; color: #bfa15f;padding-bottom:15px">
        Notas de Atualização
     </a> 
 

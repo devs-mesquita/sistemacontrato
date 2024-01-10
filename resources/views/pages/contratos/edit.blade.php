@@ -136,7 +136,7 @@
                                 <select required class="form-select" name="classe" id="classe">
                                     <option value="{{ $contrato->classe }}" selected>{{ $contrato->classe }}
                                     </option>
-                                    <option value="" selected>Selecione o tipo de Contrato</option>
+                                    
                                         <option value="Prestação de Serviço"> Prestacao de Servico</option>
                                         <option value="Fornecimento">Fornecimento</option>
                                         <option value="Aquisição"> Aquisicao</option>

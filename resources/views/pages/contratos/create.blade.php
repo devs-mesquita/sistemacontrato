@@ -20,7 +20,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">N° do Contrato</label>
-                                    <input class="form-control" type="number" placeholder="Número do Contrato" name="numero" id="numero" required>
+                                    <input class="form-control" type="text" placeholder="Número do Contrato" name="numero" id="numero" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -61,19 +61,6 @@
                                         <option value="Coordenadoria de Comunicação Social">Coordenadoria de Comunicação Social</option>
                                         <option value="Coordenadoria de Ordem Pública">Coordenadoria de Ordem Pública</option>
                                         <option value="Coordenadoria de Políticas para Mulheres">Coordenadoria de Políticas para Mulheres</option>
-                                        <option value="Departamento de Compras">Departamento de Compras</option>
-                                        <option value="Departamento de Contabilidade">Departamento de Contabilidade</option>
-                                        <option value="Departamento de Cultura">Departamento de Cultura</option>
-                                        <option value="Departamento de Defesa Civil">Departamento de Defesa Civil</option>
-                                        <option value="Departamento de Dívida Ativa">Departamento de Dívida Ativa</option>
-                                        <option value="Departamento de Material e Patrimônio">Departamento de Material e Patrimônio</option>
-                                        <option value="Departamento de Orçamento e Finanças">Departamento de Orçamento e Finanças</option>
-                                        <option value="Departamento de Pagamento">Departamento de Pagamento</option>  
-                                        <option value="Departamento de Planejamento e Análise Econômica">Departamento de Planejamento e Análise Econômica</option>
-                                        <option value="Departamento de Projetos">Departamento de Projetos</option>
-                                        <option value="Departamento de Recursos Humanos">Departamento de Recursos Humanos</option>
-                                        <option value="Departamento de Serviços Públicos">Departamento de Serviços Públicos</option>
-                                        <option value="Departamento de Trânsito">Departamento de Trânsito</option>
                                         <option value="Gabinete do Prefeito">Gabinete do Prefeito</option>
                                         <option value="Secretaria de Governança">Secretaria de Governança</option>
                                         <option value="Secretaria de Infraestrutura, Mobilidade e Serviços Públicos">Secretaria de Infraestrutura, Mobilidade e Serviços Públicos</option>
@@ -122,7 +109,7 @@
                         </div>
                         <div class="col-md-6 ">
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Objeto do Contrato </label>
+                                <label for="example-text-input" class="form-control-label">Objeto do Contrato (Assunto) </label>
                                 <input class="form-control" type="text" placeholder="Objeto do Contrato" name="objeto" id="objeto" required>
                             </div>
                         </div>
