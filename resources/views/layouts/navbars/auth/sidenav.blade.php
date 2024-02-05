@@ -26,9 +26,9 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'contrato.index' ? 'active' : '' }}" href="{{ route('contrato.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-folder-17 text-primary text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Lista Contratos</span>
+                    <span class="nav-link-text ms-1">Contratos</span>
                 </a>
             </li>
             @if (Auth::user()->nivel != 'USUARIO')
@@ -39,10 +39,19 @@
                         <i class="ni ni-badge text-primary text-sm opacity-10"></i>
                     </div>
                     
-                    <span class="nav-link-text ms-1">Lista de Responsáveis</span>
+                    <span class="nav-link-text ms-1">Responsáveis</span>
                 </a>
             </li>
-           
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'setor.index' ? 'active' : '' }}" href="{{ route('setor.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-primary text-sm opacity-10"></i>
+                    </div>
+                    
+                    <span class="nav-link-text ms-1">Setores</span>
+                </a>
+            </li>
           
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}">

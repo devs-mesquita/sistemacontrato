@@ -12,6 +12,7 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResponsavelController;
+use App\Http\Controllers\SetorController;
 
 // Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 		'contrato' => ContratoController::class,
 		'user'	   => UserController::class,
 		'responsavel' => ResponsavelController::class,
+		'setor ' => SetorController::class,
 	]);
 
 	Route::get('alterasenha',	[UserController::class, 'alterasenha'])->name('alterasenha');
@@ -39,7 +41,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route ::get('/user/{id}', 	[UserController::class, 'update'])->name('users.update');
 	Route::post('/atualizacontrato/{id}', 	[ContratoController::class, 'updateContrato'])->name('updateContrato');
 	Route::post('/alterastatus', 	[ContratoController::class, 'alterastatus'])->name('alterastatus');
-    // Route::post('/responsavel/{id}', [ResponsavelController::class, 'update'])->name('responsavel.update');
+	Route::get('/setor', [SetorController::class, 'index'])->name('setor.index');
+	Route::get('/setor/create', [SetorController::class, 'create'])->name('setor.create');
+	Route::delete('/setor/{id}', [SetorController::class, 'destroy'])->name('setor.destroy');
+
+	
+
+	
     
 
 });

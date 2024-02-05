@@ -57,75 +57,9 @@
                                     <label for="example-text-input" class="form-control-label">Secretaria Destinada
                                         :</label>
                                     <select required class="form-select" name="secretaria" id="secretaria">
-                                        <option value="{{ $contrato->secretaria }}" selected>{{ $contrato->secretaria }}
+                                        <option value="{{ $contrato->secretaria}} " selected>{{ $contrato->secretaria}}
                                         </option>
-                                        <option value="Arquivo Público Municipal">Arquivo Público Municipal</option>
-                                        <option value="Comissão Permanente de Licitação">Comissão Permanente de Licitação
-                                        </option>
-                                        <option value="Conselho Municipal de Assistência Social">Conselho Municipal de
-                                            Assistência Social</option>
-                                        <option value="Conselho Tutelar">Conselho Tutelar</option>
-                                        <option value="Controladoria Geral do Município">Controladoria Geral do Município
-                                        </option>
-                                        <option value="Coordenadoria de Comunicação Social">Coordenadoria de Comunicação
-                                            Social</option>
-                                        <option value="Coordenadoria de Ordem Pública">Coordenadoria de Ordem Pública
-                                        </option>
-                                        <option value="Coordenadoria de Políticas para Mulheres">Coordenadoria de Políticas
-                                            para Mulheres</option>
-                                        <option value="Departamento de Compras">Departamento de Compras</option>
-                                        <option value="Departamento de Contabilidade">Departamento de Contabilidade</option>
-                                        <option value="Departamento de Cultura">Departamento de Cultura</option>
-                                        <option value="Departamento de Defesa Civil">Departamento de Defesa Civil</option>
-                                        <option value="Departamento de Dívida Ativa">Departamento de Dívida Ativa</option>
-                                        <option value="Departamento de Material e Patrimônio">Departamento de Material e
-                                            Patrimônio</option>
-                                        <option value="Departamento de Orçamento e Finanças">Departamento de Orçamento e
-                                            Finanças</option>
-                                        <option value="Departamento de Pagamento">Departamento de Pagamento</option>
-                                        <option value="Departamento de Planejamento e Análise Econômica">Departamento de
-                                            Planejamento e Análise Econômica</option>
-                                        <option value="Departamento de Projetos">Departamento de Projetos</option>
-                                        <option value="Departamento de Recursos Humanos">Departamento de Recursos Humanos
-                                        </option>
-                                        <option value="Departamento de Serviços Públicos">Departamento de Serviços Públicos
-                                        </option>
-                                        <option value="Departamento de Trânsito">Departamento de Trânsito</option>
-                                        <option value="Gabinete do Prefeito">Gabinete do Prefeito</option>
-                                        <option value="Gabinete do Secretário de Governança">Gabinete do Secretário de
-                                            Governança</option>
-                                        <option
-                                            value="Gabinete do Secretário de Infraestrutura, Mobilidade e Serviços Públicos">
-                                            Gabinete do Secretário de Infraestrutura, Mobilidade e Serviços Públicos
-                                        </option>
-                                        <option value="Gabinete do Subsecretário de Obras">Gabinete do Subsecretário de
-                                            Obras</option>
-                                        <option value="Gabinete do Subsecretário de Trabalho, Desenvolvimento Econômico">
-                                            Gabinete do Subsecretário de Trabalho, Desenvolvimento Econômico</option>
-                                        <option value="Gabinete do Vice-Prefeito">Gabinete do Vice-Prefeito</option>
-                                        <option value="Guarda Civil Municipal">Guarda Civil Municipal</option>
-                                        <option value="Junta de Alistamento Militar">Junta de Alistamento Militar</option>
-                                        <option
-                                            value="PROCON - Órgão Municipal de Proteção, Orientação e Defesa do Consumidor">
-                                            PROCON - Órgão Municipal de Proteção, Orientação e Defesa do Consumidor</option>
-                                        <option value="Procuradoria Geral">Procuradoria Geral</option>
-                                        <option value="Secretaria Municipal de Educação">Secretaria Municipal de Educação
-                                        </option>
-                                        <option value="Secretaria Municipal de Saúde">Secretaria Municipal de Saúde</option>
-                                        <option value="Setor de Meio Ambiente">Setor de Meio Ambiente</option>
-                                        <option value="Setor de Protocolo Geral">Setor de Protocolo Geral</option>
-                                        <option value="Setor de Urbanismo">Setor de Urbanismo</option>
-                                        <option value="Subsecretaria de Fazenda">Subsecretaria de Fazenda</option>
-                                        <option value="Subsecretaria de Tecnologia da Informação">Subsecretaria de
-                                            Tecnologia da Informação</option>
-                                        <option value="Subsecretaria Municipal de Administração">Subsecretaria Municipal de
-                                            Administração</option>
-                                        <option value="Subsecretaria Municipal de Assistência Social">Subsecretaria
-                                            Municipal de Assistência Social</option>
-                                        <option value="Subsecretaria Municipal de Planejamento Estratégico e Gestão">
-                                            Subsecretaria Municipal de Planejamento Estratégico e Gestão</option>
-                                        <option value="Superintendência de Arrecadação Mercantil e Fiscalização">
-                                            Superintendência de Arrecadação Mercantil e Fiscalização</option>
+                                        
                                     </select>
                                 </div>
                             

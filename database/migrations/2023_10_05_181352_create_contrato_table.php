@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('data'); //data da homologacao
             $table->date('fim'); //termino de contrato
             $table->string('tipo')->nullable(); // campo vazio
-            $table->string('secretaria'); // nome
+            // nome secretaria 
             $table->date('publicado'); // data da publicadao
             $table->string('empresa'); // nome da empresa
             $table->string('objeto'); //objeto de contrato
@@ -26,7 +26,12 @@ return new class extends Migration
             $table->enum ('status', ['VIGENTE', 'VENCIDO', 'RESCINDIDO']); 
             $table->string('motivo')->nullable(); //motivo do status
             // $table->dateTime('deleted_at');
-            $table->BigInteger('user_id');
+            $table->BigInteger('user_id')->unsigned();
+            $table->BigInteger('setor_id')->unsigned();
+
+
+
+            $table->foreign('setor_id')->references('id')->on('setor')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();

@@ -23,5 +23,10 @@ class Responsavel extends Model
         return $this->hasMany(Contrato::class);
     }
 
+    public function responsavel_secretaria()
+    {
+        return $this->hasMany(Responsavel_Secretaria::class);
+    }
+
 }
 

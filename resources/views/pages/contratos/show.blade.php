@@ -47,7 +47,7 @@
                                     </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Secretaria Destinada</label>
+                                        <label for="example-text-input" class="form-control-label">Setor Destinado</label>
                                         <input class="form-control" name="secretaria" id="secretaria" type="text" placeholder="Secretaria Destinada" disabled value="{{$contrato->secretaria}}" required>
                                     </div>
                                 </div>

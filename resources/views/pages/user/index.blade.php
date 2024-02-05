@@ -15,8 +15,8 @@
         <thead>
        
             <tr>
-                <th>Nome do Fiscal </th>
-                <th>E-mail do Fiscal</th>
+                <th>Nome do Usuário </th>
+                <th>E-mail do Usuário</th>
                 <th>Nível</th> 
                 <th>Ações</th>
             </tr>

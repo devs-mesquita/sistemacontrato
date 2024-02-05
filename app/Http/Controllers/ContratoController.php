@@ -5,6 +5,7 @@ use App\Models\Contrato;
 use Illuminate\Http\Request;
 use App\Models\Fiscal;
 use App\Models\Aditivo;
+use App\Models\Setor;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Carbon\Carbon;
@@ -15,18 +16,22 @@ class ContratoController extends Controller
     {
         // $contrato = $request -> all(); 
         $contratos = Contrato::all();
+        $setor = Setor::all();
 
         return view('pages.contratos.index', compact('contratos'));
     } 
 
     public function create()
     {
-        return view('pages.contratos.create');
+        
+        $setor = Setor::all();
+        return view('pages.contratos.create', compact ('setor'));
     } 
 
     public function edit($id)
     {
         $contrato = Contrato::find($id);
+        $setor = Setor::find($id);
     
         return view('pages.contratos.edit', compact('contrato'));
 
@@ -42,7 +47,7 @@ class ContratoController extends Controller
         'data' => 'required|date',
         'publicado' => 'required|date',
         'fim' => 'required|date',
-        'secretaria' => 'required',
+        'secretaria' => 'required|array',
         'classe' => 'required',
         'empresa' => 'required',
         'objeto' => 'required',
@@ -64,6 +69,7 @@ class ContratoController extends Controller
     $contrato->classe = $request->classe;
     $contrato->empresa = $request->empresa;
     $contrato->objeto = $request->objeto;
+    $contrato->secretaria = $request->setor;
     
     $contrato->save();
     // Deletar todos os fiscais associados ao contrato
@@ -103,10 +109,9 @@ class ContratoController extends Controller
        $contrato->classe =  $request->classe;
        $contrato->empresa = $request->empresa;
        $contrato->objeto = $request->objeto;
-       
-
        $contrato->user_id  = $user_id;
-        $contrato -> save();
+       $contrato->secretaria = $request->secretaria;
+       $contrato -> save();
 
         for($i = 0; $i < count($dados['fiscal']); $i++)
         {
@@ -118,32 +123,11 @@ class ContratoController extends Controller
             ]);
         }
     
-    //    foreach($contrato->fiscais as $fiscal)
-    //    {
-
-    //     Fiscal::create([
-    //         'name' => $fiscal->nome,
-    //         'email' => $fiscal->email,
-    //         'contrato_id' => $contrato->id,
-    //     ])
-
-    //     $fiscal = new Fiscal;
-    //     $fiscal->name
-    //     $fiscal->email
-    //     $fiscal-> contrato_id = $contrato->id;
-
-    //     $fiscal->save();
-
-    //    }
-    
-    //    $contrato->save();
-
-
         return redirect('/contrato',);
     } 
     public function show($id)
     {
-        $contrato = Contrato::with('fiscais', 'aditivo')->find($id);
+        $contrato = Contrato::with('fiscais', 'aditivo', 'setor')->find($id);
 
         if(count($contrato->aditivo) > 0)
         {

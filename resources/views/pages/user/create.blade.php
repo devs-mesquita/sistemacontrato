@@ -20,9 +20,7 @@
                             <div class="row">
                                 <form action="{{url('/user')}}"  method="POST"> 
                                     {{ csrf_field() }}
-    
                                     <div class="card-body pt-4 p-3">
-                                        
                                         <div class="form-group row">
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                                 <label class="control-label" >Nome</label>
@@ -47,41 +45,25 @@
                                                 <label class="control-label" >Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
                                                     <option value="">Selecione uma Permissão</option>
-                                                    
-                                                    <option value="USUARIO">Fiscal</option>
-                                                    
-                                                 
+                                                    <option value="USUARIO">Fiscal</option>              
+                                                    <option value="ADMIN">Master Admin</option>
                                                     <option value="ADMIN">Administrador</option>
                                                   @endif
-                                                
-                                        
-                                                </select>
+                                                           </select>
                                             </div>
                                         </div>
 
                                     </div>
-
-                                     
                                     <div class="clearfix"></div>
                                     <div class="ln_solid"> </div>
-                                        <div class="footer text-center"> 
-                                            {{-- <button hidden type="submit"></button>
-                                            <button id="btn_cancelar" class="botoes-acao btn btn-round btn-warning" >
-                                                <span class="icone-botoes-acao mdi mdi-backburger"></span>   
-                                                <span class="texto-botoes-acao"> CANCELAR </span>
-                                                <div class="ripple-container"></div>
-                                            </button> --}}
-                                    
+                                        <div class="footer text-center">  
                                             <button type="submit" id="btn_salvar" class="botoes-acao btn btn-round btn-success ">
                                                 <span class="icone-botoes-acao mdi mdi-send"></span>
                                                 <span class="texto-botoes-acao"> SALVAR </span>
                                                 <div class="ripple-container"></div>
                                             </button>
-                                        </div>
-    
+                                        </div> 
                             </form>
-    
-    
                             </div>
                             </div>
                         </div>

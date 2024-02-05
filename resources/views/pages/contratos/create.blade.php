@@ -50,38 +50,13 @@
                             </div>
                                 
                             <div class="col-md-6">
-                                    <label for="example-text-input" class="form-control-label">Secretaria Responsável </label>
+                                    <label for="example-text-input" class="form-control-label">Setor Responsável </label>
                                     <select required class="form-select" name="secretaria" id="secretaria">
-                                        <option value="" selected>Selecione a Secretaria Responsável</option>
-                                        <option value="Arquivo Público Municipal">Arquivo Público Municipal</option>
-                                        <option value="Comissão Permanente de Licitação">Comissão Permanente de Licitação</option>
-                                        <option value="Conselho Municipal de Assistência Social">Conselho Municipal de Assistência Social</option>
-                                        <option value="Conselho Tutelar">Conselho Tutelar</option>
-                                        <option value="Controladoria Geral do Município">Controladoria Geral do Município</option>
-                                        <option value="Coordenadoria de Comunicação Social">Coordenadoria de Comunicação Social</option>
-                                        <option value="Coordenadoria de Ordem Pública">Coordenadoria de Ordem Pública</option>
-                                        <option value="Coordenadoria de Políticas para Mulheres">Coordenadoria de Políticas para Mulheres</option>
-                                        <option value="Gabinete do Prefeito">Gabinete do Prefeito</option>
-                                        <option value="Secretaria de Governança">Secretaria de Governança</option>
-                                        <option value="Secretaria de Infraestrutura, Mobilidade e Serviços Públicos">Secretaria de Infraestrutura, Mobilidade e Serviços Públicos</option>
-                                        <option value="Secretaria de Obras">Secretaria de Obras</option>
-                                        <option value="Secretaria de Trabalho e Desenvolvimento Econômico">Secretaria de Trabalho e Desenvolvimento Econômico</option>
-                                        <option value="Gabinete do Vice-Prefeito">Gabinete do Vice-Prefeito</option>
-                                        <option value="Guarda Civil Municipal">Guarda Civil Municipal</option>
-                                        <option value="Junta de Alistamento Militar">Junta de Alistamento Militar</option>
-                                        <option value="PROCON - Órgão Municipal de Proteção, Orientação e Defesa do Consumidor">PROCON - Órgão Municipal de Proteção, Orientação e Defesa do Consumidor</option>
-                                        <option value="Procuradoria Geral">Procuradoria Geral</option>
-                                        <option value="Secretaria Municipal de Educação">Secretaria Municipal de Educação</option>
-                                        <option value="Secretaria Municipal de Saúde">Secretaria Municipal de Saúde</option>
-                                        <option value="Setor de Meio Ambiente">Setor de Meio Ambiente</option>
-                                        <option value="Setor de Protocolo Geral">Setor de Protocolo Geral</option>
-                                        <option value="Setor de Urbanismo">Setor de Urbanismo</option>
-                                        <option value="Subsecretaria de Fazenda">Subsecretaria de Fazenda</option>
-                                        <option value="Subsecretaria de Tecnologia da Informação">Subsecretaria de Tecnologia da Informação</option>
-                                        <option value="Subsecretaria Municipal de Administração">Subsecretaria Municipal de Administração</option>
-                                        <option value="Subsecretaria Municipal de Assistência Social">Subsecretaria Municipal de Assistência Social</option>
-                                        <option value="Subsecretaria Municipal de Planejamento Estratégico e Gestão">Subsecretaria Municipal de Planejamento Estratégico e Gestão</option>
-                                        <option value="Superintendência de Arrecadação Mercantil e Fiscalização">Superintendência de Arrecadação Mercantil e Fiscalização</option>
+                                        @foreach ($setor as $setores)
+                                        <option value="{{$setores->nome}}">{{$setores->nome}}</option>
+                                        @endforeach
+                                            
+
                                     </select>
                                 </div>
                                 

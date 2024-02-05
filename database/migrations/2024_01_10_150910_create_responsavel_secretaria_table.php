@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('setor', function (Blueprint $table) {
+        Schema::create('responsavel_secretaria', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->timestamps();
+            $table->BigInteger('responsavel_id')->unsigned();
+            $table->foreign('responsavel_id')->references('id')->on('responsavel');
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('setor');
+        Schema::dropIfExists('responsavel_secretaria');
     }
 };

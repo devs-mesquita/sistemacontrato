@@ -24,7 +24,8 @@ class Contrato extends Model
         'classe',
         'motivo',
         'user_id',
-        'deleted_at'
+        'deleted_at',
+        'setor_id'
     ];
     
     public function fiscais()
@@ -37,6 +38,10 @@ class Contrato extends Model
     {
         return $this->hasMany(Aditivo::class);
         
+    }
+    public function setor()
+    {
+        return $this->belongsTo(Setor::class, 'setor_id');
     }
 
 
