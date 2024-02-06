@@ -95,19 +95,20 @@
             </button>
             </div>
             <div class="modal-body">
-                <h4>Versão Beta 0.1</h4>
+                <h4>Versão Beta 1.0</h4>
                 <p> Essa versão contem as funcionalidades basicas do sistema</p>
                 <li>Criar novos Contratos</li>
                 <li>Trocar status do Contrato</li>
                 <li>Criar novos Consultores</li>
                 <p></p>
-                <h4>Versão Beta 0.2</h4>
-                <li>Adicionado novos dashboards</li>
+                <h4>Versão Beta 2.0</h4>
                 <li>Adicionado Lista de Responsáveis</li>
-                <li>Adicionado cpf no cadastro do Usuário</li>
+                <li>Adicionado CPF no cadastro do Usuário</li>
                 <li>Adicionado telefone no cadastro do Fiscal</li>
-                <li>Adicionado no cadastro de contratos: N° PROCESSO, TIPO CONTRATO, OBJETO CONTRATO, EMPRESA, STATUS.</li>
-                <li>Adicionado botao alterar status juntamente com o motivo da troca.</li>
+                <li>Adicionado novas informações na tela principal.</li>
+                <li>Adicionado botao alterar status, com o motivo da alteração.</li>
+                <li>Lista de criação de setores.</li>
+                <li>Alteração de ícones barra de navegação.</li>
             </div>
         </div>
         </div>

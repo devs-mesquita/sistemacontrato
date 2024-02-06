@@ -31,9 +31,9 @@ class ContratoController extends Controller
     public function edit($id)
     {
         $contrato = Contrato::find($id);
-        $setor = Setor::find($id);
+        $setor = Setor::all();
     
-        return view('pages.contratos.edit', compact('contrato'));
+        return view('pages.contratos.edit', compact('contrato','setor'));
 
         
     }

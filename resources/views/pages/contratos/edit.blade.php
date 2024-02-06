@@ -53,15 +53,16 @@
                                         type="date" placeholder="dd/mm/aaaa" value="{{ $contrato->data }}" required>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label for="example-text-input" class="form-control-label">Secretaria Destinada
-                                        :</label>
-                                    <select required class="form-select" name="secretaria" id="secretaria">
-                                        <option value="{{ $contrato->secretaria}} " selected>{{ $contrato->secretaria}}
-                                        </option>
-                                        
-                                    </select>
-                                </div>
+                           <div class="col-md-6">
+    <label for="example-text-input" class="form-control-label">Secretaria Destinada:</label>
+    <select required class="form-select" name="secretaria" id="secretaria">
+            <option value="{{$contrato->secretaria}}" selected>{{$contrato->secretaria}}</option>        
+        @foreach ($setor as $setores)
+            <option value="{{ $setores->nome }}">{{$setores->nome}} </option>
+        @endforeach
+    </select>
+</div>
+
                             
                             
                             <div class="col-md-6">
