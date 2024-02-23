@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Setor;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 
@@ -17,7 +18,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('pages.user.create');
+        $setor = Setor::all();
+        return view('pages.user.create', compact('setor'));
     }
 
     public function store()
@@ -29,6 +31,7 @@ class UserController extends Controller
         $user->cpf = $data->cpf;
         $user->telefone = $data->telefone;
         $user->nivel = $data->nivel;
+        $user->setor_id = $data->setor;
         $user->password = bcrypt('pmm123456');
 
         // dd($user);
@@ -63,12 +66,14 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::find($id);
+    
+        $setor = Setor::all();
+        $user = User::with('setor')->find($id);
+        // dd($user);
         if(Auth::user()->nivel == 'USUARIO'){
-            return redirect('/user'); 
-
+            
         }
-    return view('pages.user.edit', compact('user'));
+    return view('pages.user.edit', compact('user','setor'));
     }
 
     public function update(Request $request, $id)
@@ -79,6 +84,8 @@ class UserController extends Controller
         $user->nivel = $request->nivel;
         $user->cpf = $request->cpf;
         $user->telefone = $request->telefone;
+        $user->setor_id = $request->setor;
+        // dd($user);
         $user->save(); 
          return redirect('/user'); 
     }

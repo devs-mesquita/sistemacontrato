@@ -48,23 +48,30 @@
                                                 <input type="telefone" id="telefone" name="telefone" class="form-control"
                                                     value="{{ $user->telefone }}" placeholder="Telefone" required>
                                             </div>
+                                            
                                             <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                                 <label class="control-label">Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
-
-                                                    {{-- <option value="">Selecione uma Permissão</option> --}}
                                                     @if ($user->nivel == 'ADMIN')
                                                         <option selected value="ADMIN">Administrador</option>
                                                         <option value="USUARIO">Fiscal</option>
                                                     @endif
-                                                    {{-- <option value="">Selecione uma Permissão</option> --}}
+
                                                     @if ($user->nivel == 'USUARIO')
                                                         <option value="ADMIN">Administrador</option>
                                                         <option selected value="USUARIO">Fiscal</option>
                                                     @endif
-
                                                 </select>
                                             </div>
+                                            <div class="col-md-12">
+                                                <label for="example-text-input" class="form-control-label">Setor Responsável </label>
+                                                <select required class="form-select" name="setor" id="setor">
+                                                    <option value="{{$user->setor_id}}" selected>{{$user->setor->nome}}</option>
+                                                    @foreach ($setor as $setores)
+                                                    <option value="{{$setores->id}}">{{$setores->nome}}</option>
+                                                    @endforeach
+                                                </select>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>

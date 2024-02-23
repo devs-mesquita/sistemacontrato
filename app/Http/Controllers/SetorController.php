@@ -25,6 +25,7 @@ class SetorController extends Controller
 
     $setor = new Setor;
     $setor->nome =  $request->nome;
+    
     $setor->save();
 
     return redirect()->route('setor.index')->with('success', 'Setor criado com sucesso!');

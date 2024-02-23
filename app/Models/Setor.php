@@ -20,4 +20,9 @@ class Setor extends Model
     {
         return $this->hasMany(Contrato::class);
     }
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

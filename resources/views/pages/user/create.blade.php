@@ -49,8 +49,18 @@
                                                     <option value="ADMIN">Master Admin</option>
                                                     <option value="ADMIN">Administrador</option>
                                                   @endif
-                                                           </select>
+                                                 </select>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="example-text-input" class="form-control-label">Setor Responsável </label>
+                                            <select required class="form-select" name="setor" id="setor">
+                                                @foreach ($setor as $setores)
+                                                <option value="{{$setores->id}}">{{$setores->nome}}</option>
+                                                @endforeach
+                                                    
+        
+                                            </select>
                                         </div>
 
                                     </div>

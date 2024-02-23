@@ -15,11 +15,11 @@
                 <thead>
 
                     <tr>
-                        <th>Número do Contrato</th>
-                        <th>Número do Processo</th>
+                        <th>Número Contrato</th>
+                        <th>Número Processo</th>
                         <th>Data da Publicação</th>
-                        <th>Término do Contrato</th>
-                        <th>Tipo de Contrato</th>
+                        <th>Término Contrato</th>
+                        <th>Empresa do Contrato</th>
                         <th>Setor Responsável </th>
                         <th>Status</th>
                         <th>Ações</th>
@@ -77,7 +77,7 @@
                             </td>
                             </td>
                             <td>
-                                {{ $contrato->classe }}
+                                {{ $contrato->empresa }}
 
                                 {{-- @else
                                     {{ date('d/m/Y', strtotime($contrato->data)) }}
@@ -85,52 +85,118 @@
                             </td>
                             <td>
                                 @if ($contrato->secretaria)
-                                    {{ $contrato->secretaria}}
+                                    {{ $contrato->secretaria }}
                                 @else
                                     Nenhum setor associado
                                 @endif
                             </td>
 
-                            <td>{{ $contrato->status }}
+                            <td>{{ $contrato->status }}</td>
 
-
-                            </td>
+                            {{-- // BOTOES  --}}
                             <td class="text-center">
                                 <div style="display:flex; gap: 8px; align-items: center;">
-                                    @if ($contrato->user_id == Auth::user()->id)
-                                        
+                                    @if (Auth::user()->nivel == 'SUPERADMIN')
                                         <a id="btn_show" style="margin: 0;"
                                             href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
                                             title="Editar">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
-                                        @if (Auth::user()->nivel == 'ADMIN')
-                                            <a id="btn_exclui_solicitacao" style="margin: 0;"
-                                                data-arquivar="{{ $contrato->id }}" href="#" title="Arquivar">
-                                                <i class="ni ni-archive-2"></i>
-                                            </a>
-                                        @endif
-
+                                        <a id="btn_exclui_solicitacao" style="margin: 0;"
+                                            data-arquivar="{{ $contrato->id }}" href="#" title="Arquivar">
+                                            <i class="ni ni-archive-2"></i>
+                                        </a>
                                         <a id="btn_aditiva_contrato" style="margin: 0;" data-aditivar="{{ $contrato->id }}"
                                             href="#" title="Aditivar">
                                             <i class="ni ni-fat-add"></i>
                                         </a>
-
                                         <a class="btn_trocar_status" data-info="{{ $contrato->id }}" data-toggle="tooltip"
                                             , data-placement="bottom" href="#" title="Status">
                                             <i class="ni ni-active-40"></i>
                                         </a>
+                                        <a id="btn_show" style="margin: 0;"
+                                            href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
+                                            title="Visualizar">
+                                            <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                    @elseif(Auth::user()->nivel == 'ADMIN')
+                                        @if (Auth::user()->setor->nome == $contrato->secretaria)
+                                            <a id="btn_show" style="margin: 0;"
+                                                href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
+                                                title="Editar">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                            <a id="btn_exclui_solicitacao" style="margin: 0;"
+                                                data-arquivar="{{ $contrato->id }}" href="#" title="Arquivar">
+                                                <i class="ni ni-archive-2"></i>
+                                            </a>
+                                            <a id="btn_aditiva_contrato" style="margin: 0;"
+                                                data-aditivar="{{ $contrato->id }}" href="#" title="Aditivar">
+                                                <i class="ni ni-fat-add"></i>
+                                            </a>
+                                            <a class="btn_trocar_status" data-info="{{ $contrato->id }}"
+                                                data-toggle="tooltip" , data-placement="bottom" href="#"
+                                                title="Status">
+                                                <i class="ni ni-active-40"></i>
+                                            </a>
+                                            <a id="btn_show" style="margin: 0;"
+                                                href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
+                                                title="Visualizar">
+                                                <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                        @endif
+                                    @else
+                                        @if ($contrato->migrado == 1)
+                                            @if ($contrato->secretaria == Auth::user()->setor->nome)
+                                                <a id="btn_show" style="margin: 0;"
+                                                    href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
+                                                    title="Editar">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </a>
+                                                <a id="btn_aditiva_contrato" style="margin: 0;"
+                                                    data-aditivar="{{ $contrato->id }}" href="#" title="Aditivar">
+                                                    <i class="ni ni-fat-add"></i>
+                                                </a>
+                                                <a class="btn_trocar_status" data-info="{{ $contrato->id }}"
+                                                    data-toggle="tooltip" , data-placement="bottom" href="#"
+                                                    title="Status">
+                                                    <i class="ni ni-active-40"></i>
+                                                </a>
+                                                <a id="btn_show" style="margin: 0;"
+                                                    href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
+                                                    title="Visualizar">
+                                                    <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
+                                                </a>
+                                            @endif
+                                        @else
+                                            @if ($contrato->user_id == Auth::user()->id)
+                                                <a id="btn_show" style="margin: 0;"
+                                                    href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
+                                                    title="Editar">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </a>
+                                                <a id="btn_aditiva_contrato" style="margin: 0;"
+                                                    data-aditivar="{{ $contrato->id }}" href="#" title="Aditivar">
+                                                    <i class="ni ni-fat-add"></i>
+                                                </a>
+                                                <a class="btn_trocar_status" data-info="{{ $contrato->id }}"
+                                                    data-toggle="tooltip" , data-placement="bottom" href="#"
+                                                    title="Status">
+                                                    <i class="ni ni-active-40"></i>
+                                                </a>
+                                                <a id="btn_show" style="margin: 0;"
+                                                    href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
+                                                    title="Visualizar">
+                                                    <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
+                                                </a>
+                                            @endif
+                                        @endif
                                     @endif
-                                    <a id="btn_show" style="margin: 0;"
-                                        href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
-                                        title="Visualizar">
-                                        <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
-                                    </a>
-
                                 </div>
                             </td>
                         </tr>
                     @endforeach
+
                 </tbody>
             </table>
 
