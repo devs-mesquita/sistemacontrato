@@ -30,6 +30,7 @@
               <td>{{$responsavel->email}}</td>
               <td>{{$responsavel->telefone}}</td>
               <td class="text-center">
+                
                 <div style="display:flex; gap: 8px; align-items: center;">
                     <a id="btn_show"
                      style="margin: 0;"
