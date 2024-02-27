@@ -53,13 +53,15 @@
                                                 <label class="control-label">Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
                                                     @if ($user->nivel == 'ADMIN')
-                                                        <option selected value="ADMIN">Administrador</option>
-                                                        <option value="USUARIO">Fiscal</option>
+                                                        <option selected value="ADMIN">ADMIN</option>
+                                                        <option value="USUARIO">USUARIO</option>
+                                                        <option value="USUARIO">SUPERADMIN</option>
                                                     @endif
 
                                                     @if ($user->nivel == 'USUARIO')
-                                                        <option value="ADMIN">Administrador</option>
-                                                        <option selected value="USUARIO">Fiscal</option>
+                                                    <option selected value="ADMIN">ADMIN</option>
+                                                    <option value="USUARIO">USUARIO</option>
+                                                    <option value="USUARIO">SUPERADMIN</option>
                                                     @endif
                                                 </select>
                                             </div>
