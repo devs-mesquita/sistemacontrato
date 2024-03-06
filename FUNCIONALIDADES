@@ -61,3 +61,8 @@ LISTA DE RESPONSÁVEIS / LISTA DE USUARIOS CADASTRADOS NO SISTEMA.
     CADASTRAR USUÁRIO ->
     FORMULÁRIO DE CADASTRO DE USUÁRIO COM INFORMAÇÕES NECESSÁRIAS DO USUARIO.
     SALVAR -> SALVAR O FORMULÁRIO PREENCHIDO COM RESPECTIVAS INFORMAÇÕES.
+    ----------------------------------------------------------------------------------------------------
+SUPERADMIN: Tem permissão para editar, arquivar, aditivar, alterar status e visualizar contratos.
+ADMIN: Tem permissão para editar, arquivar, aditivar, alterar status e visualizar contratos apenas se pertencer ao mesmo setor do contrato.
+VIEWER: Tem permissão apenas para visualizar contratos.
+USUARIO: usuários Podem editar, aditivar, alterar status e visualizar apenas contratos que eles próprios criaram.

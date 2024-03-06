@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Usuarios'])
-    @if (Auth::user()->nivel != 'USUARIO')
     <div class="container-fluid px-2">
         <div class="row">
             <div class="col-md-12">
@@ -15,7 +14,7 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        
                         <div class="card-body p-3">
                             <div class="row">
                                 <form action="{{url('/user')}}"  method="POST"> 
@@ -40,15 +39,16 @@
                                                 <label class="control-label" >CPF</label>
                                                 <input type="text" id="cpf" name="cpf"  class="form-control" placeholder="CPF" minlength="4" maxlength="15" required >	
                                             </div>
-                                            @if (Auth::user()->nivel == 'ADMIN')
+                                            
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label class="control-label" >Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
                                                     <option value="">Selecione uma Permissão</option>
                                                     <option value="USUARIO">Fiscal</option>              
-                                                    <option value="ADMIN">Master Admin</option>
+                                                    <option value="SUPERADMIN">Master Admin</option>
                                                     <option value="ADMIN">Administrador</option>
-                                                  @endif
+                                                    <option value="VIEWER">Visualizador</option>
+                                                 
                                                  </select>
                                             </div>
                                         </div>

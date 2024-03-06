@@ -30,7 +30,7 @@
               <td>{{$responsavel->email}}</td>
               <td>{{$responsavel->telefone}}</td>
               <td class="text-center">
-                
+                @if (Auth::check() && Auth::user()->nivel != 'USUARIO' && Auth::user()->nivel != 'VIEWER' && Auth::user()->nivel != 'ADMIN')  
                 <div style="display:flex; gap: 8px; align-items: center;">
                     <a id="btn_show"
                      style="margin: 0;"
@@ -45,6 +45,7 @@
                         <i class="fa fa-trash" ></i> 
                     </a>
                   </div></td>
+                  @endif
                     
 
             </tr>

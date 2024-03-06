@@ -30,6 +30,7 @@ class ContratoController extends Controller
 
     public function edit($id)
     {
+       
         $contrato = Contrato::find($id);
         $setor = Setor::all();
     
@@ -40,25 +41,11 @@ class ContratoController extends Controller
 
     public function updateContrato(Request $request, $id)
 {
-    // Validar os dados recebidos
-    $request->validate([
-        'numero' => 'required',
-        'processo' => 'required',
-        'data' => 'required|date',
-        'publicado' => 'required|date',
-        'fim' => 'required|date',
-        'secretaria' => 'required|array',
-        'classe' => 'required',
-        'empresa' => 'required',
-        'objeto' => 'required',
-        'fiscal' => 'required|array',
-        'email.*' => 'required|email',
-        
-    ]);
+    // dd($request->all());
 
     // Encontrar o contrato pelo ID com seus fiscais relacionados
     $contrato = Contrato::with('fiscais')->find($id);
-
+    // dd($contrato);
     // Atualizar os dados do contrato
     $contrato->numero = $request->numero;
     $contrato->processo = $request->processo;

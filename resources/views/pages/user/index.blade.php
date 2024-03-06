@@ -8,11 +8,11 @@
                 <div>
 
                     <ul class="nav navbar-right panel_toolbox">
-                        @if (Auth::user()->nivel == 'ADMIN')
+                        
                             <a href="{{ url('user/create') }}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip"
                                 data-placement="bottom" title="" data-original-title="Nova Sala">Cadastrar Usuario
                             </a>
-                        @endif
+                       
 
                         <thead>
 

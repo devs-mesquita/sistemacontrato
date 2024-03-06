@@ -52,7 +52,7 @@
                     <span class="nav-link-text ms-1">Setores</span>
                 </a>
             </li>
-          
+            @if (Auth::check() && Auth::user()->nivel != 'USUARIO' && Auth::user()->nivel != 'VIEWER' && Auth::user()->nivel != 'ADMIN')
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}">
                    
@@ -64,6 +64,8 @@
                     <span class="nav-link-text ms-1">Usuarios</span>
                 </a>
             </li>
+            @endif
+            
         </ul>
         @endif
     </div>
@@ -109,6 +111,7 @@
                 <li>Adicionado botao alterar status, com o motivo da alteração.</li>
                 <li>Lista de criação de setores.</li>
                 <li>Alteração de ícones barra de navegação.</li>
+                <li>Criação de um nivel de permissão para visualização.</li>
             </div>
         </div>
         </div>

@@ -22,17 +22,18 @@
             </thead>
 
             @foreach ($setores as $setor)
-            <tr>
-              <td>{{$setor->nome}}</td>
+              <tr>
+              <td>{{$setor->nome}}</td>         
               <td class="text-center">
+                @if (Auth::check() && Auth::user()->nivel != 'USUARIO' && Auth::user()->nivel != 'VIEWER' && Auth::user()->nivel != 'ADMIN')
                         <a id="btn_exclui_setor" style="margin: 4;"
                         href="#"
                         data-excluir='{{$setor->id}}'
                         title="Excluir">
                         <i class="fa fa-trash" ></i> 
-              </td>
-                      
                     </a>
+            </td>     
+           @endif
             </tr>
 
         @endforeach

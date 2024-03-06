@@ -7,9 +7,11 @@
 
             <table id="scc" class="display">
                 <div>
+                    @if (Auth::user()->nivel == 'ADMIN')
                     <ul class="nav navbar-right panel_toolbox">
                         <a href="{{ url('contrato/create') }}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip"
                             data-placement="bottom" title="" data-original-title="Nova Sala">Cadastrar Contrato </a>
+                        @endif   
                     </ul>
                 </div>
                 <thead>
@@ -96,7 +98,7 @@
                             {{-- // BOTOES  --}}
                             <td class="text-center">
                                 <div style="display:flex; gap: 8px; align-items: center;">
-                                    @if (Auth::user()->nivel == 'SUPERADMIN')
+                                    @if (Auth::user()->nivel == 'SUPERADMIN' || (Auth::user()->nivel == 'ADMIN' && Auth::user()->setor->nome == $contrato->secretaria) || (Auth::user()->nivel == 'USUARIO' && Auth::user()->id == $contrato->user_id))
                                         <a id="btn_show" style="margin: 0;"
                                             href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
                                             title="Editar">
@@ -106,97 +108,29 @@
                                             data-arquivar="{{ $contrato->id }}" href="#" title="Arquivar">
                                             <i class="ni ni-archive-2"></i>
                                         </a>
-                                        <a id="btn_aditiva_contrato" style="margin: 0;" data-aditivar="{{ $contrato->id }}"
-                                            href="#" title="Aditivar">
+                                        <a id="btn_aditiva_contrato" style="margin: 0;"
+                                            data-aditivar="{{ $contrato->id }}" href="#" title="Aditivar">
                                             <i class="ni ni-fat-add"></i>
                                         </a>
-                                        <a class="btn_trocar_status" data-info="{{ $contrato->id }}" data-toggle="tooltip"
-                                            , data-placement="bottom" href="#" title="Status">
+                                        <a class="btn_trocar_status" data-info="{{ $contrato->id }}"
+                                            data-toggle="tooltip" , data-placement="bottom" href="#"
+                                            title="Status">
                                             <i class="ni ni-active-40"></i>
                                         </a>
+                                    @endif
+                                    @if (Auth::user()->nivel == 'SUPERADMIN' || (Auth::user()->nivel == 'ADMIN' && Auth::user()->setor->nome == $contrato->secretaria) || (Auth::user()->nivel == 'USUARIO' && Auth::user()->id == $contrato->user_id) || (Auth::user()->nivel == 'VIEWER'))
                                         <a id="btn_show" style="margin: 0;"
                                             href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
                                             title="Visualizar">
                                             <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
                                         </a>
-                                    @elseif(Auth::user()->nivel == 'ADMIN')
-                                        @if (Auth::user()->setor->nome == $contrato->secretaria)
-                                            <a id="btn_show" style="margin: 0;"
-                                                href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
-                                                title="Editar">
-                                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </a>
-                                            <a id="btn_exclui_solicitacao" style="margin: 0;"
-                                                data-arquivar="{{ $contrato->id }}" href="#" title="Arquivar">
-                                                <i class="ni ni-archive-2"></i>
-                                            </a>
-                                            <a id="btn_aditiva_contrato" style="margin: 0;"
-                                                data-aditivar="{{ $contrato->id }}" href="#" title="Aditivar">
-                                                <i class="ni ni-fat-add"></i>
-                                            </a>
-                                            <a class="btn_trocar_status" data-info="{{ $contrato->id }}"
-                                                data-toggle="tooltip" , data-placement="bottom" href="#"
-                                                title="Status">
-                                                <i class="ni ni-active-40"></i>
-                                            </a>
-                                            <a id="btn_show" style="margin: 0;"
-                                                href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
-                                                title="Visualizar">
-                                                <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
-                                            </a>
-                                        @endif
-                                    @else
-                                        @if ($contrato->migrado == 1)
-                                            @if ($contrato->secretaria == Auth::user()->setor->nome)
-                                                <a id="btn_show" style="margin: 0;"
-                                                    href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
-                                                    title="Editar">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                </a>
-                                                <a id="btn_aditiva_contrato" style="margin: 0;"
-                                                    data-aditivar="{{ $contrato->id }}" href="#" title="Aditivar">
-                                                    <i class="ni ni-fat-add"></i>
-                                                </a>
-                                                <a class="btn_trocar_status" data-info="{{ $contrato->id }}"
-                                                    data-toggle="tooltip" , data-placement="bottom" href="#"
-                                                    title="Status">
-                                                    <i class="ni ni-active-40"></i>
-                                                </a>
-                                                <a id="btn_show" style="margin: 0;"
-                                                    href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
-                                                    title="Visualizar">
-                                                    <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                            @endif
-                                        @else
-                                            @if ($contrato->user_id == Auth::user()->id)
-                                                <a id="btn_show" style="margin: 0;"
-                                                    href="{{ route('contrato.edit', ['contrato' => $contrato->id]) }}"
-                                                    title="Editar">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                </a>
-                                                <a id="btn_aditiva_contrato" style="margin: 0;"
-                                                    data-aditivar="{{ $contrato->id }}" href="#" title="Aditivar">
-                                                    <i class="ni ni-fat-add"></i>
-                                                </a>
-                                                <a class="btn_trocar_status" data-info="{{ $contrato->id }}"
-                                                    data-toggle="tooltip" , data-placement="bottom" href="#"
-                                                    title="Status">
-                                                    <i class="ni ni-active-40"></i>
-                                                </a>
-                                                <a id="btn_show" style="margin: 0;"
-                                                    href="{{ route('contrato.show', ['contrato' => $contrato->id]) }}"
-                                                    title="Visualizar">
-                                                    <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                            @endif
-                                        @endif
                                     @endif
                                 </div>
                             </td>
+                            
                         </tr>
                     @endforeach
-
+{{-- PRECISO FAZER COM Q O VIERWE SOMENTE VISUALIZE TUDO  --}}
                 </tbody>
             </table>
 

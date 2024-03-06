@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('cpf')->unique();
             $table->string('telefone');
-            $table->enum ('nivel', ['ADMIN', 'USUARIO','SUPERADMIN']);
+            $table->enum ('nivel', ['ADMIN', 'USUARIO','SUPERADMIN','VIEWER']);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
