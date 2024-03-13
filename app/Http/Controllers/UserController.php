@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Setor;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -22,21 +23,47 @@ class UserController extends Controller
         return view('pages.user.create', compact('setor'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $data = request();
+
+        $verifica_email = User::withTrashed()->where('email',$request->email)->first();
+
+        $verifica_cpf = User::where('cpf',$request->cpf)->first();
+
+        if($verifica_cpf != null){
+            // colocar uma mnesagem que o cpf existe
+            return redirect('/user');
+        }
+
+        if($verifica_email != null){
+            $verifica_email->name = $request->name;
+            $verifica_email->email = $request->email;
+            $verifica_email->cpf = $request->cpf;
+            $verifica_email->telefone = $request->telefone;
+            $verifica_email->nivel = $request->nivel;
+            $verifica_email->setor_id = $request->setor;
+            $verifica_email->password = bcrypt('pmm123456');
+            $verifica_email->deleted_at = null;
+
+            $verifica_email->save();
+            return redirect('/user');
+        }
+
+
         $user = new User;
-        $user->name = $data->name;
-        $user->email = $data->email;
-        $user->cpf = $data->cpf;
-        $user->telefone = $data->telefone;
-        $user->nivel = $data->nivel;
-        $user->setor_id = $data->setor;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->cpf = $request->cpf;
+        $user->telefone = $request->telefone;
+        $user->nivel = $request->nivel;
+        $user->setor_id = $request->setor;
         $user->password = bcrypt('pmm123456');
 
-        // dd($user);
         $user->save();
+
         return redirect('/user');
+
+        
     }   
 
     public function AlteraSenha()
@@ -69,6 +96,7 @@ class UserController extends Controller
     
         $setor = Setor::all();
         $user = User::with('setor')->find($id);
+
         // dd($user);
         if(Auth::user()->nivel == 'USUARIO'){
             
@@ -78,6 +106,8 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+
+
         $user = User::find($id); 
         $user->name = $request->name; 
         $user->email = $request->email;  
@@ -93,7 +123,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->delete(); 
+        $user->cpf = null;
+        $user->deleted_at = Carbon::now('America/Sao_Paulo');
+
+        $user->save();
+        // $user->delete(); 
 
         // return redirect()->route('pages.user.index');
     }

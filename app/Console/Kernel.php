@@ -12,7 +12,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        
+    $schedule->call(function () {
+        Mail::to('medeirosjorge__@hotmail.com')->send(new Sendmail($data));
+    })->daily()->when(function () {
+        return now()->addDays(90)->isToday();
+    });
     }
 
     /**

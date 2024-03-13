@@ -7,12 +7,13 @@
 
             <table id="scc" class="display">
                 <div>
-                    @if (Auth::user()->nivel == 'ADMIN')
+                    @if(Auth::user()->nivel == "USUARIO" || Auth::user()->nivel == "ADMIN" || Auth::user()->nivel == "SUPERADMIN")
                     <ul class="nav navbar-right panel_toolbox">
                         <a href="{{ url('contrato/create') }}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip"
-                            data-placement="bottom" title="" data-original-title="Nova Sala">Cadastrar Contrato </a>
-                        @endif   
+                            data-placement="bottom" title="" data-original-title="Nova Sala">Cadastrar Contrato
+                        </a> 
                     </ul>
+                    @endif
                 </div>
                 <thead>
 

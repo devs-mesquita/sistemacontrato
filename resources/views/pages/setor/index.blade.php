@@ -8,7 +8,7 @@
     <div>
     
         <ul class="nav navbar-right panel_toolbox">
-            @if (Auth::user()->nivel == 'ADMIN')
+            @if (Auth::user()->nivel == 'SUPERADMIN'|| Auth::user()->nivel == 'ADMIN')
         <a href="{{url('setor/create')}}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nova Sala">Cadastrar Setor </a> 
    @endif
 
@@ -25,7 +25,7 @@
               <tr>
               <td>{{$setor->nome}}</td>         
               <td class="text-center">
-                @if (Auth::check() && Auth::user()->nivel != 'USUARIO' && Auth::user()->nivel != 'VIEWER' && Auth::user()->nivel != 'ADMIN')
+                @if (Auth::user()->nivel == 'SUPERADMIN'|| Auth::user()->nivel == 'ADMIN')
                         <a id="btn_exclui_setor" style="margin: 4;"
                         href="#"
                         data-excluir='{{$setor->id}}'

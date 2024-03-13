@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('cpf')->unique();
+            $table->string('cpf')->unique()->nullable();
             $table->string('telefone');
             $table->enum ('nivel', ['ADMIN', 'USUARIO','SUPERADMIN','VIEWER']);
             $table->rememberToken();

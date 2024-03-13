@@ -31,7 +31,7 @@
                     <span class="nav-link-text ms-1">Contratos</span>
                 </a>
             </li>
-            @if (Auth::user()->nivel != 'USUARIO')
+            @if (Auth::user()->nivel != "USUARIO")
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'responsavel.index' ? 'active' : '' }}" href="{{ route('responsavel.index') }}">
                     <div
@@ -52,7 +52,7 @@
                     <span class="nav-link-text ms-1">Setores</span>
                 </a>
             </li>
-            @if (Auth::check() && Auth::user()->nivel != 'USUARIO' && Auth::user()->nivel != 'VIEWER' && Auth::user()->nivel != 'ADMIN')
+            @if (Auth::user()->nivel == 'SUPERADMIN'|| Auth::user()->nivel == 'ADMIN'||Auth::user()->nivel == 'VIEWER')
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}">
                    

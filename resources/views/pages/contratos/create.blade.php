@@ -7,10 +7,6 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        {{-- <div>
-                            <ul class="nav navbar-right panel_toolbox">
-                            <a href="{{url('contrato/create')}}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nova Sala">Salvar Contrato</a> 
-                        </div> --}}
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('contrato.store')}}">

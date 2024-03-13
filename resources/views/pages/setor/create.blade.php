@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Usuarios'])
-    @if (Auth::user()->nivel != 'USUARIO')
+ 
     <div class="container-fluid px-2">
         <div class="row">
             <div class="col-md-12">
@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+                    
                         <div class="card-body p-3">
                             <div class="row">
                                 <form action="{{url('/setor')}}"  method="POST"> 

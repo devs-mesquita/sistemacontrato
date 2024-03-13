@@ -8,7 +8,7 @@
     <div>
     
         <ul class="nav navbar-right panel_toolbox">
-            @if (Auth::user()->nivel == 'ADMIN')
+            @if (Auth::user()->nivel == 'SUPERADMIN'|| Auth::user()->nivel == 'ADMIN')
         <a href="{{url('responsavel/create')}}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nova Sala">Cadastrar Responsavel </a> 
    @endif
 
@@ -30,7 +30,7 @@
               <td>{{$responsavel->email}}</td>
               <td>{{$responsavel->telefone}}</td>
               <td class="text-center">
-                @if (Auth::check() && Auth::user()->nivel != 'USUARIO' && Auth::user()->nivel != 'VIEWER' && Auth::user()->nivel != 'ADMIN')  
+                @if (Auth::user()->nivel == 'SUPERADMIN'|| Auth::user()->nivel == 'ADMIN')
                 <div style="display:flex; gap: 8px; align-items: center;">
                     <a id="btn_show"
                      style="margin: 0;"
