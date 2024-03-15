@@ -6,7 +6,7 @@
         <a class="navbar-brand m-0 " style="text-align: center;" href="{{ route('home') }}"
             >
             <img src="{{asset("img/brasao.png")}}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">SCC</span>
+            <span class="ms-1 font-weight-bold">Controlador de Contratos</span>
         </a>
     </div>
             <hr class="horizontal dark mt-0">
