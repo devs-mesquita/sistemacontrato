@@ -46,29 +46,38 @@
                                             <div class="form-group col-md-4 col-sm-6 col-xs-12">
                                                 <label class="control-label">Telefone</label>
                                                 <input type="telefone" id="telefone" name="telefone" class="form-control"
-                                                    value="{{ $user->telefone }}" placeholder="Telefone" required>
+                                                    value="{{$user->telefone}}" placeholder="Telefone" required>
                                             </div>
                                             
                                             <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                                 <label class="control-label">Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
                                                     @if ($user->nivel == 'ADMIN')
-                                                        <option selected value="ADMIN">ADMIN</option>
+                                                        <option value="{{$user->nivel}}" selected>{{$user->nivel}}</option>
+                                                        
+                                                        <option value="ADMIN">ADMIN</option>
                                                         <option value="USUARIO">USUARIO</option>
-                                                        <option value="USUARIO">SUPERADMIN</option>
+                                                        <option value="VIEWER">SOMENTE LEITURA</option>
                                                     @endif
+                                                    @if ($user->nivel == 'SUPERADMIN')
 
-                                                    @if ($user->nivel == 'USUARIO')
-                                                    <option selected value="ADMIN">ADMIN</option>
-                                                    <option value="USUARIO">USUARIO</option>
-                                                    <option value="USUARIO">SUPERADMIN</option>
+                                                        <option value="{{$user->nivel}}" selected>{{$user->nivel}}</option>
+
+                                                        <option value="SUPERADMIN">SUPER ADMIN</option>
+                                                        <option value="ADMIN">ADMIN</option>
+                                                        <option value="USUARIO">USUARIO</option>
+                                                        <option value="VIEWER">SOMENTE LEITURA</option>
                                                     @endif
                                                 </select>
                                             </div>
                                             <div class="col-md-12">
                                                 <label for="example-text-input" class="form-control-label">Setor Responsável </label>
                                                 <select required class="form-select" name="setor" id="setor">
-                                                    <option value="{{$user->setor_id}}" selected>{{$user->setor->nome}}</option>
+                                                    @if ($user->setor_id != null)
+                                                        <option value="{{$user->setor_id}}" selected>{{$user->setor->nome}}</option>
+                                                    @else
+                                                        <option value="" selected>Selecione um Setor</option>
+                                                    @endif
                                                     @foreach ($setor as $setores)
                                                     <option value="{{$setores->id}}">{{$setores->nome}}</option>
                                                     @endforeach

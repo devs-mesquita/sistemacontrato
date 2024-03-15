@@ -100,4 +100,11 @@ public function update(Request $request, $id)
          return redirect('/responsavel'); 
     }
 
+    public function destroy($id)
+    {
+        $responsavel = Responsavel::find($id);
+
+        $responsavel->delete();
+    }
+
 }

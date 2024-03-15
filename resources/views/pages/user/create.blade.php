@@ -1,5 +1,5 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Usuarios'])
     <div class="container-fluid px-2">
@@ -14,67 +14,87 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card-body p-3">
                             <div class="row">
-                                <form action="{{url('/user')}}"  method="POST"> 
+                                <form action="{{ url('/user') }}" method="POST">
                                     {{ csrf_field() }}
                                     <div class="card-body pt-4 p-3">
                                         <div class="form-group row">
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label class="control-label" >Nome</label>
-                                                <input type="text" id="name" name="name"  class="form-control" placeholder="Nome" minlength="4" maxlength="100" required >	
+                                                <label class="control-label">Nome</label>
+                                                <input type="text" id="name" name="name" class="form-control"
+                                                    placeholder="Nome" minlength="4" maxlength="100" required>
                                             </div>
 
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label class="control-label" >Email</label>
-                                                <input type="email" id="email" name="email"  class="form-control" placeholder="Email" minlength="4" maxlength="100" required >	
+                                                <label class="control-label">Email</label>
+                                                <input type="email" id="email" name="email" class="form-control"
+                                                    placeholder="Email" minlength="4" maxlength="100" required>
                                             </div>
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label class="control-label" >Telefone</label>
-                                                <input type="telefone" id="telefone" name="telefone"  class="form-control" placeholder="Telefone"  required >	
+                                                <label class="control-label">Telefone</label>
+                                                <input type="telefone" id="telefone" name="telefone" class="form-control"
+                                                    placeholder="Telefone" required>
                                             </div>
-                                          
+
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label class="control-label" >CPF</label>
-                                                <input type="text" id="cpf" name="cpf"  class="form-control" placeholder="CPF" minlength="4" maxlength="15" required >	
+                                                <label class="control-label">CPF</label>
+                                                <input type="text" id="cpf" name="cpf" class="form-control"
+                                                    placeholder="CPF" minlength="4" maxlength="15" required>
                                             </div>
-                                            
+
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                                <label class="control-label" >Permissão</label>
+                                                <label class="control-label">Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
-                                                    <option value="">Selecione uma Permissão</option>
-                                                    <option value="USUARIO">Fiscal</option>              
-                                                    <option value="SUPERADMIN">Master Admin</option>
-                                                    <option value="ADMIN">Administrador</option>
-                                                    <option value="VIEWER">Visualizador</option>
-                                                 
-                                                 </select>
+                                                    @if (Auth::user()->nivel == 'ADMIN')
+                                                        <option value="" selected>Selecione uma Permissão</option>
+
+                                                        <option value="ADMIN">ADMIN</option>
+                                                        <option value="USUARIO">USUARIO</option>
+                                                        <option value="VIEWER">SOMENTE LEITURA</option>
+                                                    @endif
+                                                    @if (Auth::user()->nivel == 'SUPERADMIN')
+                                                        <option value="" selected>Selecione uma Permissão</option>
+
+                                                        <option value="SUPERADMIN">SUPER ADMIN</option>
+                                                        <option value="ADMIN">ADMIN</option>
+                                                        <option value="USUARIO">USUARIO</option>
+                                                        <option value="VIEWER">SOMENTE LEITURA</option>
+                                                    @endif
+                                                    {{-- <option value="">Selecione uma Permissão</option>
+                                                    <option value="USUARIO">USER</option>              
+                                                    <option value="ADMIN">ADMIN</option>
+                                                    <option value="SUPERADMIN">SUPERADMIN</option>
+                                                    <option value="VIEWER">SOMENTE VISUALIZADOR</option> --}}
+
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <label for="example-text-input" class="form-control-label">Setor Responsável </label>
+                                            <label for="example-text-input" class="form-control-label">Setor Responsável
+                                            </label>
                                             <select required class="form-select" name="setor" id="setor">
+                                                <option value="" selected>Selecione um Setor</option>
                                                 @foreach ($setor as $setores)
-                                                <option value="{{$setores->id}}">{{$setores->nome}}</option>
+                                                    <option value="{{ $setores->id }}">{{ $setores->nome }}</option>
                                                 @endforeach
-                                                    
-        
+
                                             </select>
                                         </div>
 
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="ln_solid"> </div>
-                                        <div class="footer text-center">  
-                                            <button type="submit" id="btn_salvar" class="botoes-acao btn btn-round btn-success ">
-                                                <span class="icone-botoes-acao mdi mdi-send"></span>
-                                                <span class="texto-botoes-acao"> SALVAR </span>
-                                                <div class="ripple-container"></div>
-                                            </button>
-                                        </div> 
-                            </form>
-                            </div>
+                                    <div class="footer text-center">
+                                        <button type="submit" id="btn_salvar"
+                                            class="botoes-acao btn btn-round btn-success ">
+                                            <span class="icone-botoes-acao mdi mdi-send"></span>
+                                            <span class="texto-botoes-acao"> SALVAR </span>
+                                            <div class="ripple-container"></div>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -82,18 +102,16 @@
             </div>
         </div>
     </div>
-  
+    </div>
+
     @include('layouts.footers.auth.footer')
-    @endsection
-    
-            
-    @push('js')
+@endsection
+
+
+@push('js')
     <script src="{{ asset('/assets/js/vanillaMasker.min.js') }}"></script>
     <script>
-
         VMasker(document.querySelector("#cpf")).maskPattern("999.999.999-99");
         VMasker(document.querySelector("#telefone")).maskPattern("(99) 99999-9999");
-
     </script>
 @endpush
-   

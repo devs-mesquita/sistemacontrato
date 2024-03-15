@@ -14,9 +14,10 @@ class ContratoController extends Controller
 {
     public function index()
     {
-        // $contrato = $request -> all(); 
-        $contratos = Contrato::all();  
-        $setor = Setor::all();
+
+        // dd(Auth::user());
+        $contratos = Contrato::with('setor')->get();  
+        // dd($contratos);
 
         return view('pages.contratos.index', compact('contratos'));
     } 
@@ -31,7 +32,7 @@ class ContratoController extends Controller
     public function edit($id)
     {
        
-        $contrato = Contrato::find($id);
+        $contrato = Contrato::with('fiscais')->find($id);
         $setor = Setor::all();
     
         return view('pages.contratos.edit', compact('contrato','setor'));
@@ -41,8 +42,6 @@ class ContratoController extends Controller
 
     public function updateContrato(Request $request, $id)
 {
-    // dd($request->all());
-
     // Encontrar o contrato pelo ID com seus fiscais relacionados
     $contrato = Contrato::with('fiscais')->find($id);
     // dd($contrato);
@@ -52,34 +51,30 @@ class ContratoController extends Controller
     $contrato->data = $request->data;
     $contrato->publicado = $request->publicado;
     $contrato->fim = $request->fim;
-    $contrato->secretaria = $request->secretaria;
     $contrato->classe = $request->classe;
     $contrato->empresa = $request->empresa;
     $contrato->objeto = $request->objeto;
-    $contrato->secretaria = $request->setor;
+    $contrato->setor_id = $request->setor_id;
     
     $contrato->save();
     // Deletar todos os fiscais associados ao contrato
     $contrato->fiscais()->delete();
-    // Criar e associar os novos fiscais
-    if (is_array($request->fiscal)) {
-        foreach ($request->fiscal as $index => $fisca) {
-            Fiscal::create([
-                'nome' => $fisca['nome'],
-                'email' => $fisca['email'],
-                'telefone' => $fisca['telefone'],
-                'contrato_id' => $contrato->id,
-            ]);
+  
+        if (is_array($request->fiscal)) {
+            for($i = 0; $i < count($request->fiscal); $i++){
+                if($request->fiscal[$i] != null){
+                    Fiscal::create([
+                        'nome'  => $request->fiscal[$i],
+                        'email' => $request->email[$i],
+                        'telefone'  => $request->telefone[$i],
+                        'contrato_id'   => $contrato->id,
+                    ]);
+                }
+            }
         }
-    }
-    // Redirecionar para a página de contratos
-    return redirect('/contrato');
-//     Adicionei validação para garantir que os dados recebidos sejam válidos.
-// Utilizei a função delete() para remover todos os fiscais associados ao contrato.
-// Utilizei um loop foreach para criar e associar os novos fiscais ao contrato.
-// Simplifiquei a estrutura do código para torná-lo mais legível.
 
-}
+        return redirect('/contrato');
+    }
 
     public function store(Request $request)
     {
@@ -92,12 +87,11 @@ class ContratoController extends Controller
        $contrato->data = $request->data;
        $contrato->publicado = $request->publicado; 
        $contrato->fim =  $request->fim;
-       $contrato->secretaria =  $request->secretaria;
        $contrato->classe =  $request->classe;
        $contrato->empresa = $request->empresa;
        $contrato->objeto = $request->objeto;
        $contrato->user_id  = $user_id;
-       $contrato->secretaria = $request->secretaria;
+       $contrato->setor_id = $request->setor_id;
        $contrato -> save();
 
         for($i = 0; $i < count($dados['fiscal']); $i++)
@@ -123,9 +117,6 @@ class ContratoController extends Controller
             $qtd = 0;
         }
 
-
-// dd($contrato);
-        
         return view('pages.contratos.show', compact('contrato','qtd'));
     } 
 
@@ -138,37 +129,73 @@ class ContratoController extends Controller
 
         return redirect()->route('contrato.index');
     }
-public function update(Request $request)
+    
+    public function update(Request $request)
+    { 
+        $contrato = Contrato::findOrFail($request -> id);
 
-{ 
-    $contrato = Contrato::findOrFail($request -> id);
-    // $data = Carbon::parse($contrato->fim)->addMonths(+$request->meses);
-    // $contrato->fim = $data;
 
-  Aditivo::create([
-        'contrato_id'=> $contrato->id,
-        'data_anterior' => $contrato->fim
-  ]);
-     $data = Carbon::parse($contrato->fim)->addMonths(+$request->meses);
-    $contrato->fim = $data;
-    $contrato->save();
+        Aditivo::create([
+                'contrato_id'=> $contrato->id,
+                'data_anterior' => $contrato->fim
+        ]);
 
-    return response()->json(["contrato" => $contrato]);
-}
+        $data = Carbon::parse($contrato->fim)->addMonths(+$request->meses);
+        $contrato->fim = $data;
+        $contrato->save();
 
-public function alterastatus(Request $request)
-{
+        return response()->json(["contrato" => $contrato]);
+    }
 
-    $contrato = Contrato::find($request->id);
+    public function alterastatus(Request $request)
+    {
+        $contrato = Contrato::find($request->id);
 
-    $contrato->status = $request->status;
-    $contrato->motivo = $request->motivo;
+        $contrato->status = $request->status;
+        $contrato->motivo = $request->motivo;
 
-    $contrato->save();
+        $contrato->save();
+    }
 
-  
+    public function NotificaEmail()
+    {
+        
+        // PEGAR TODOS OS CONTRATOS NÃO ARQUIVADOS (ARQUIVADOS = DELETED AT NOT NULL)
 
-}
+        // FAZER O CALCULO DE DATAS
+
+        // 90 DIAS
+
+        // 60 DIAS
+
+        // 30 DIAS
+
+        // 15 DIAS
+
+        // 5 DIAS
+
+
+        // $dataparapremium = Carbon::now('America/Sao_Paulo');
+
+        // $expirationDate = strtotime($contrato->fim);
+
+        // $today = strtotime(now());
+
+        // $diffMonths = floor(($expirationDate - $today) / (30 * 24 * 60 * 60));
+
+        // $data_inicio = new DateTime('now');
+        // $data_fim = new DateTime($contrato->fim);
+        // $dateInterval = $data_inicio->diff($data_fim);
+
+        // $contratos = Contrato::all();
+
+        // foreach($contratos as $contrato)
+        // {   
+
+        // }
+
+
+    }
     
 }
 

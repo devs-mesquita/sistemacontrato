@@ -45,6 +45,5 @@ class Contrato extends Model
     }
 
 
-
 }
 

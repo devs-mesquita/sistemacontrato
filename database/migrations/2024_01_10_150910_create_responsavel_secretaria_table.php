@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->timestamps();
             $table->BigInteger('responsavel_id')->unsigned();
-            $table->foreign('responsavel_id')->references('id')->on('responsavel');
+            $table->foreign('responsavel_id')->references('id')->on('responsavel')->onDelete('cascade');
         });
     }
 
