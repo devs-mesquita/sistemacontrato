@@ -13,6 +13,7 @@ use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResponsavelController;
 use App\Http\Controllers\SetorController;
+use App\Http\Controllers\SendmailController;
 
 // Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -28,27 +29,24 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/', [HomeController::class, 'index'])->name('home');
 
+	Route::get('alterasenha',	[UserController::class, 'alterasenha'])->name('alterasenha');
+	Route::post('postalterasenha', 	[UserController::class, 'postalterasenha'])->name('postalterasenha');
+	Route::post('/atualizacontrato/{id}', 	[ContratoController::class, 'updateContrato'])->name('updateContrato');
+	Route::post('/alterastatus', 	[ContratoController::class, 'alterastatus'])->name('alterastatus');
+
+
+
+	Route::get('sendemail',	[SendmailController::class, 'enviarEmail']);
+
+
+	
 	Route::resources([
 		'contrato' => ContratoController::class,
 		'user'	   => UserController::class,
 		'responsavel' => ResponsavelController::class,
-		'setor ' => SetorController::class,
+		'setor' => SetorController::class,
 	]);
-
-	Route::get('alterasenha',	[UserController::class, 'alterasenha'])->name('alterasenha');
-	Route::post('postalterasenha', 	[UserController::class, 'postalterasenha'])->name('postalterasenha');
-	Route::get('/user/{id}/edit', 	[UserController::class, 'edit'])->name('users.edit');
-	Route ::get('/user/{id}', 	[UserController::class, 'update'])->name('users.update');
-	Route::post('/atualizacontrato/{id}', 	[ContratoController::class, 'updateContrato'])->name('updateContrato');
-	Route::post('/alterastatus', 	[ContratoController::class, 'alterastatus'])->name('alterastatus');
-	Route::get('/setor', [SetorController::class, 'index'])->name('setor.index');
-	Route::get('/setor/create', [SetorController::class, 'create'])->name('setor.create');
-	Route::delete('/setor/{id}', [SetorController::class, 'destroy'])->name('setor.destroy');
-
 	
-
-	
-    
 
 });
 

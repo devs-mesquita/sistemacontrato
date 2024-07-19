@@ -7,20 +7,25 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
+
+use App\Models\Contrato;
 
 class Sendmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $contrato;
+    public $dias;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($contrato)
+    public function __construct(Contrato $contrato, $dias)
     {
-       $this->contrato = $data; 
+       $this->contrato = $contrato; 
+       $this->dias = $dias; 
     }
 
     /**
@@ -29,7 +34,8 @@ class Sendmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Validade Contrato',
+            from: new Address('semad@mesquita.rj.gov.br', 'PREFEITURA MUNICIPAL DE MESQUITA'),
+            subject: 'Alerta de Validade do Contrato',
         );
     }
 

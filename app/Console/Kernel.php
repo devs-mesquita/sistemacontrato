@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Http\Controllers\SendmailController;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,11 +14,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         
-    $schedule->call(function () {
-        Mail::to('medeirosjorge__@hotmail.com')->send(new Sendmail($data));
-    })->daily()->when(function () {
-        return now()->addDays(90)->isToday();
-    });
+        $schedule
+        ->call([SendmailController::class, "enviarEmail"])
+        ->dailyAt('9:10');
     }
 
     /**
