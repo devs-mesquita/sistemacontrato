@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class SendmailController extends Controller
 {
 
-      public function enviarEmail()
+      public static function enviarEmail()
       {
             $data_inicio = new Carbon('now');
 

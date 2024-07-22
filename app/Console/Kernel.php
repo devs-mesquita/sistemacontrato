@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
         
         $schedule
         ->call([SendmailController::class, "enviarEmail"])
-        ->dailyAt('9:10');
+        ->dailyAt('12:00');
     }
 
     /**
