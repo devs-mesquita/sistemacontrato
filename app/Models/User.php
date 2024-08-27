@@ -20,7 +20,8 @@ class User extends Authenticatable
         'password',
         'cpf',
         'telefone',
-        'nivel'
+        'nivel',
+        'setor_id'
     ];
 
     protected $hidden = [
@@ -34,6 +35,6 @@ class User extends Authenticatable
 
     public function setor()
     {
-        return $this->belongsTo(Setor::class);
+        return $this->belongsTo(Setor::class, 'setor_id', 'id');
     }
 }

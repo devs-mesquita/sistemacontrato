@@ -19,6 +19,7 @@
                             <tr>
                                 <th>Nome do Usuário </th>
                                 <th>E-mail do Usuário</th>
+                                <th>Setor</th>
                                 <th>Nível</th>
                                 <th>Ações</th>
                             </tr>
@@ -28,7 +29,9 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->setor ? $user->setor->nome : 'Nenhum setor associado' }}</td>
                                 <td>{{ $user->nivel }}</td>
+                               
                                 <td class="text-center">
                                     @if (Auth::user()->nivel == 'SUPERADMIN'|| Auth::user()->nivel == 'ADMIN')
                                         <div style="display:flex; gap: 8px; align-items: center;">

@@ -47,13 +47,13 @@
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label class="control-label">Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
-                                                    @if (Auth::user()->nivel == 'ADMIN')
+                                                    
                                                         <option value="" selected>Selecione uma Permissão</option>
 
                                                         <option value="ADMIN">ADMIN</option>
                                                         <option value="USUARIO">USUARIO</option>
                                                         <option value="VIEWER">SOMENTE LEITURA</option>
-                                                    @endif
+                                                  
                                                     @if (Auth::user()->nivel == 'SUPERADMIN')
                                                         <option value="" selected>Selecione uma Permissão</option>
 

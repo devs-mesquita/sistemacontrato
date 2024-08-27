@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="row">
-                                <form action="{{ route('users.update', $user->id) }}" method="post">
+                                <form action="{{ route('user.update', $user->id) }}" method="post">
                                     <input type="hidden" name="_method" value="PUT">
                                     {{ csrf_field() }}
 
@@ -52,14 +52,8 @@
                                             <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                                 <label class="control-label">Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
-                                                    @if ($user->nivel == 'ADMIN')
-                                                        <option value="{{$user->nivel}}" selected>{{$user->nivel}}</option>
-                                                        
-                                                        <option value="ADMIN">ADMIN</option>
-                                                        <option value="USUARIO">USUARIO</option>
-                                                        <option value="VIEWER">SOMENTE LEITURA</option>
-                                                    @endif
-                                                    @if ($user->nivel == 'SUPERADMIN')
+                                            
+                                                  
 
                                                         <option value="{{$user->nivel}}" selected>{{$user->nivel}}</option>
 
@@ -67,7 +61,7 @@
                                                         <option value="ADMIN">ADMIN</option>
                                                         <option value="USUARIO">USUARIO</option>
                                                         <option value="VIEWER">SOMENTE LEITURA</option>
-                                                    @endif
+                                                   
                                                 </select>
                                             </div>
                                             <div class="col-md-12">
