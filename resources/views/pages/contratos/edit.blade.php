@@ -1,5 +1,6 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('tomselect/tom-select.bootstrap4.css') }}">
 @section('content')
     <style>
         .hidden {
@@ -11,10 +12,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        {{-- <div>
-                        <ul class="nav navbar-right panel_toolbox">
-                        <a href="{{url('contrato/create')}}" class="btn btn-primary btn-md  ms-auto" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nova Sala">Salvar Contrato</a> 
-                    </div> --}}
+                    
                     </div>
                     <div class="card-body">
                         <form action="{{ route('updateContrato', $contrato->id) }}" method="post">
@@ -60,15 +58,16 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="example-text-input" class="form-control-label">Secretaria Destinada:</label>
-                                    <select required class="form-select" name="setor_id" id="setor_id">
-                                        <option value="{{ $contrato->setor_id }}" selected>{{ $contrato->setor->nome }}
-                                        </option>
+                                    <label for="setor_id" class="form-control-label">Secretaria Destinada:</label>
+                                    <select class="form-select" id="setor_id" name="setor_id" required autocomplete="off">
+                                        
+                                        <option value="">Selecione o Setor</option>
                                         @foreach ($setor as $setores)
-                                            <option value="{{ $setores->id }}">{{ $setores->nome }} </option>
-                                        @endforeach
+                                        <option value="{{ $setores->id }}">{{ $setores->nome }}</option>
+                                    @endforeach
                                     </select>
-                                </div>
+                                </div> 
+                                
 
 
 
@@ -172,7 +171,8 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label" hidden>E-mail do
+                                                <label for="example-text-input" class="form-control-label" hidden>E-mail
+                                                    do
                                                     Fiscal</label>
                                                 <input class="form-control" type="text" name="email[]" id="email"
                                                     hidden>
@@ -181,7 +181,8 @@
 
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label" hidden>Telefone do
+                                                <label for="example-text-input" class="form-control-label" hidden>Telefone
+                                                    do
                                                     Fiscal</label>
                                                 <input class="form-control" type="text" name="telefone[]"
                                                     id="telefone" hidden>
@@ -295,32 +296,20 @@
         }
     </script>
 
-
-    {{-- <script>
-        let i = 25;
-
-        $('.clonador').click(function(e) {
-            console.log(i);
-            e.preventDefault();
-            $('.novadiv').append(
-                '<div class="dados"> <div class="d-flex flex-column"><div class="form-group row dados"><div class="form-group col-md-6"><label for="example-text-input" class="form-control-label">Nome do Fiscal</label><input class="form-control" type="text" name="fiscal[' +
-                i +
-                '][nome]" id="fiscal" placeholder="Nome do Fiscal"></div><div class="form-group col-md-6"><label for="example-text-input" class="form-control-label">E-mail do Fiscal</label><input class="form-control" type="email"  placeholder="Digite o E-mail" name="fiscal[' +
-                i +
-                '][email]" id="email">   </div><div class="form-group col-md-6"><label for="example-text-input" class="form-control-label">Telefone do Fiscal</label><input class="form-control" type="telefone"  placeholder="Digite o telefone" name="fiscal[' +
-                i +
-                '][telefone]" id="telefone[]" required></div><div class="form-group col-md-2"><button class="btn btn-link text-danger text-gradient px-3 mb-0 btn_remove"><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Remover</button></div></div></div></div><div></div></div>'
-            );
-            i++;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new TomSelect('#setor_id', {
+            plugins: ['input_autogrow'],
+            create: false,
+            sortField: {
+                field: 'text',
+                direction: 'asc'
+            },
+            placeholder: "Selecione o Setor",
+            maxOptions: 1000,
         });
-
-        $('form').on('click', '.btn_remove', function(e) {
-            e.preventDefault();
-            if ($('.dados').length > 1) {
-                $(this).parents('.dados').remove();
-            }
-        });
-    </script> --}}
+    });
+    </script>
     <script>
         VMasker(document.querySelector("#telefone")).maskPattern("(99) 99999-9999");
     </script>

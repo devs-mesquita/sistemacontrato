@@ -47,26 +47,13 @@
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label class="control-label">Permissão</label>
                                                 <select class="form-control" name="nivel" id="nivel" required>
-                                                    
-                                                        <option value="" selected>Selecione uma Permissão</option>
-
-                                                        <option value="ADMIN">ADMIN</option>
-                                                        <option value="USUARIO">USUARIO</option>
-                                                        <option value="VIEWER">SOMENTE LEITURA</option>
-                                                  
                                                     @if (Auth::user()->nivel == 'SUPERADMIN')
                                                         <option value="" selected>Selecione uma Permissão</option>
-
                                                         <option value="SUPERADMIN">SUPER ADMIN</option>
                                                         <option value="ADMIN">ADMIN</option>
                                                         <option value="USUARIO">USUARIO</option>
                                                         <option value="VIEWER">SOMENTE LEITURA</option>
                                                     @endif
-                                                    {{-- <option value="">Selecione uma Permissão</option>
-                                                    <option value="USUARIO">USER</option>              
-                                                    <option value="ADMIN">ADMIN</option>
-                                                    <option value="SUPERADMIN">SUPERADMIN</option>
-                                                    <option value="VIEWER">SOMENTE VISUALIZADOR</option> --}}
 
                                                 </select>
                                             </div>

@@ -18,10 +18,15 @@ class SendmailController extends Controller
             $data_inicio = new Carbon('now');
 
             $contratos = Contrato::with('fiscais','setor')->get();
-            $responsaveis = Responsavel::all();
+            // $responsaveis = Responsavel::all();
 
             foreach($contratos as $contrato)
             {
+
+                  $responsaveis = Responsavel::whereHas('responsavel_secretaria', function($query) use ($contrato){
+                        $query->where('nome', $contrato->setor->nome);
+                  })->get();
+                        
                   $data_fim = new Carbon($contrato->fim,'America/Sao_Paulo');
                   // dd($data_fim);
                   $dateInterval = $data_inicio->diff($data_fim);
